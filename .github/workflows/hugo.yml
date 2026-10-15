@@ -23,15 +23,14 @@ jobs:
         with:
           submodules: false
 
-      # 新增：安装 Node.js（用来装 tailwindcss cli）
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 新增：全局安装 TailwindCSS CLI
-      - name: Install TailwindCSS CLI
-        run: npm install -g tailwindcss
+      # 重点：安装 @tailwindcss/cli，提供 tailwindcss 命令
+      - name: Install Tailwind CLI
+        run: npm install -D tailwindcss @tailwindcss/cli
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -39,7 +38,7 @@ jobs:
           hugo-version: latest
           extended: true
 
-      - name: Build
+      - name: Build Hugo site
         run: hugo --minify
 
       - name: Upload artifact
