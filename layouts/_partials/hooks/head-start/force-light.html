@@ -1,0 +1,8 @@
+{{/* Dark mode is disabled for this site. HugoBlox's theme init (hb-init.js)
+     honours a previously stored `wc-color-theme` localStorage entry even when
+     `theme.mode` is `light`, so clear it here — before the deferred module
+     scripts run — and make sure the `dark` class is gone from <html>. */}}
+<script>
+  try { localStorage.removeItem('wc-color-theme'); } catch (e) {}
+  document.documentElement.classList.remove('dark');
+</script>

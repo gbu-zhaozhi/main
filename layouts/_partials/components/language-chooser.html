@@ -1,0 +1,52 @@
+{{/*
+  Zhao Lab: inline language switcher — renders "中文 | EN" in the header.
+
+  Overrides the theme's globe-icon dropdown (layouts/_partials/components/
+  language-chooser.html) so both languages are visible at a glance without
+  opening a menu, as required for the bilingual lab site.
+
+  Language display names come from data/languages.yaml.
+  Output order is fixed: 中文 first, EN second.
+*/}}
+
+{{ $page := .page }}
+{{ $class := .class | default "" }}
+
+{{/* Build a lang -> page map covering the current page and all translations. */}}
+{{ $byLang := dict $page.Lang $page }}
+{{ range $page.Translations }}
+  {{ $byLang = merge $byLang (dict .Lang .) }}
+{{ end }}
+
+{{ $names := hugo.Data.languages | default dict }}
+{{ $ordered := slice "zh-cn" "en" }}
+{{ $navLabel := T "languages" | default "Languages" }}
+
+{{ if gt (len $byLang) 1 }}
+<nav
+  class="hb-language-switcher flex items-center {{ with $class }}{{ . | safeCSS }}{{ end }}"
+  aria-label="{{ $navLabel }}"
+>
+  {{ $first := true }}
+  {{ range $code := $ordered }}
+    {{ with index $byLang $code }}
+      {{ $label := index $names $code | default $code }}
+      {{ $isCurrent := eq $code $page.Lang }}
+      {{ if not $first }}<span class="px-1 text-gray-300 dark:text-gray-600 select-none" aria-hidden="true">|</span>{{ end }}
+      <a
+        href="{{ .RelPermalink }}"
+        hreflang="{{ $code }}"
+        lang="{{ $code }}"
+        {{ if $isCurrent }}aria-current="page"{{ end }}
+        class="px-1 text-sm font-medium transition-colors
+        {{ if $isCurrent }}
+          text-primary-600 dark:text-primary-400 font-semibold
+        {{ else }}
+          text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400
+        {{ end }}"
+      >{{ $label }}</a>
+      {{ $first = false }}
+    {{ end }}
+  {{ end }}
+</nav>
+{{ end }}

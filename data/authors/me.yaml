@@ -1,0 +1,138 @@
+schema: hugoblox/author/v1
+slug: me
+is_owner: true
+name:
+  display: "Zhi Zhao"
+  given: "Zhi"
+  family: "Zhao"
+  alternate: "赵志"
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ""
+role: "Assistant Professor"
+user_groups:
+  - Principal Investigator
+bio: |
+  Zhi Zhao is an Assistant Professor in the School of Advanced Engineering at
+  Great Bay University (GBU). His research focuses on the design and optimization
+  of intelligent materials and structures, developing inverse design frameworks
+  for mechanics and multiphysics problems that connect theory, additive
+  manufacturing, and experimental validation.
+
+  Before joining GBU, he was a Postdoctoral Researcher at the University of
+  Illinois Urbana-Champaign (UIUC), where he also earned his Ph.D. in Civil
+  Engineering. His work has appeared in Science Advances, Advanced Functional
+  Materials, npj Computational Materials, and the Journal of the Mechanics and
+  Physics of Solids, among others, and a first-author paper of his received the
+  ASME Henry Hess Early Career Publication Award.
+
+affiliations:
+  - name: School of Advanced Engineering, Great Bay University
+    url: https://www.gbu.edu.cn/
+
+links:
+  - icon: at-symbol
+    url: mailto:zhaoz@gbu.edu.cn
+    label: E-mail
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?user=945Ut_wAAAAJ
+    label: Google Scholar
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/zhi-zhao-1648791a3/
+    label: LinkedIn
+
+interests:
+  - Inverse Design and Topology Optimization
+  - Architected Materials and Metamaterials
+  - Magneto-Mechanical and Multiphysics Systems
+  - Physical Intelligence and Intelligent Structures
+
+education:
+  - degree: "Ph.D. in Civil Engineering"
+    institution: "University of Illinois Urbana-Champaign"
+    year: "2019 – 2025"
+    start: "2019-08-01"
+    end: "2025-09-01"
+    summary: |
+      Dissertation: "Topology optimization and physical realization of
+      magnetically active soft materials: from reprogrammable metamaterials to
+      biomedical robots" (Advisor: Prof. Xiaojia Shelly Zhang)
+  - degree: "M.S. in Civil Engineering"
+    institution: "Tongji University"
+    year: "2016 – 2019"
+    start: "2016-09-01"
+    end: "2019-05-01"
+  - degree: "B.S. in Civil Engineering"
+    institution: "Tongji University"
+    year: "2012 – 2016"
+    start: "2012-09-01"
+    end: "2016-05-01"
+
+experience:
+  - role: "Assistant Professor"
+    org: "School of Advanced Engineering, Great Bay University"
+    start: "2026-09-01"
+    summary: |
+      Principal investigator of Zhao Lab, working on the design and optimization
+      of intelligent materials and structures.
+  - role: "Postdoctoral Researcher"
+    org: "University of Illinois Urbana-Champaign"
+    start: "2025-10-01"
+    end: "2026-07-01"
+    summary: |
+      Advisor: Prof. Xiaojia Shelly Zhang.
+
+awards:
+  - title: "ASME Henry Hess Early Career Publication Award (as first author)"
+    awarder: "ASME"
+    date: "2025-01-01"
+  - title: "Travel Award, 18th U.S. National Congress on Computational Mechanics"
+    awarder: "USACM"
+    date: "2025-01-01"
+  - title: "3rd Place, Computational Mechanics Student Poster Competition, EMI Conference"
+    awarder: "ASCE EMI"
+    date: "2024-01-01"
+  - title: "Loh Kwan Chen Distinguished Fellowship, UIUC"
+    awarder: "University of Illinois Urbana-Champaign"
+    date: "2022-09-01"
+  - title: "2nd Place, NSF Student Research Poster Competition, IMECE"
+    awarder: "ASME"
+    date: "2022-01-01"
+  - title: "Best Student Poster (Materials, Manufacturing, and Optimization track), USNCCM 16"
+    awarder: "USACM"
+    date: "2021-01-01"
+  - title: "Graduate Fellowship, UIUC"
+    awarder: "University of Illinois Urbana-Champaign"
+    date: "2019-08-01"
+  - title: "Outstanding Graduate, Tongji University"
+    awarder: "Tongji University"
+    date: "2019-05-01"
+
+skills:
+  - name: "Programming"
+    items:
+      - name: "MATLAB"
+      - name: "Python"
+  - name: "Simulation software"
+    items:
+      - name: "Custom design optimization platforms (MATLAB, FEniCSx)"
+      - name: "ABAQUS"
+      - name: "COMSOL"
+  - name: "Experimental techniques"
+    items:
+      - name: "Additive manufacturing"
+      - name: "Mechanical testing"
+      - name: "Magnetic actuation"
+      - name: "Electrical measurement"
+  - name: "Documentation and visualization"
+    items:
+      - name: "LaTeX"
+      - name: "Adobe Illustrator / Photoshop"
+      - name: "ParaView"
+      - name: "Premiere"
+
+languages:
+  - name: "Chinese (native)"
+  - name: "English (professional)"

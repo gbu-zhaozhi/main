@@ -1,0 +1,53 @@
+# Languages
+#   English is the default language (served at the site root).
+#   Simplified Chinese is served under /zh-cn/ and selectable via the header language switcher.
+#   Documentation: https://docs.hugoblox.com/reference/language/
+
+en:
+  label: EN
+  contentDir: content/en
+  title: Zhao Lab
+  locale: en-us
+  weight: 1
+
+zh-cn:
+  label: 中文
+  contentDir: content/zh-cn
+  title: Zhao Lab
+  locale: zh-CN
+  weight: 2
+  params:
+    hugoblox:
+      identity:
+        name: Zhao Lab
+        organization: 大湾区大学
+        tagline: 智能材料与结构的设计优化
+        description: Zhao Lab 隶属大湾区大学先进工程学院，研究方向为智能材料与结构的设计优化，涵盖计算力学、拓扑优化、构筑材料与力学超材料、多功能材料与结构以及物理智能。
+      footer:
+        text: 大湾区大学先进工程学院 · zhaoz@gbu.edu.cn
+  menu:
+    main:
+      - name: 首页
+        url: /
+        weight: 10
+      - name: 研究方向
+        url: research/
+        weight: 20
+      - name: 团队成员
+        url: people/
+        weight: 30
+      - name: 论文发表
+        url: publications/
+        weight: 40
+      - name: 教育教学
+        url: education/
+        weight: 45
+      - name: 招生招聘
+        url: openings/
+        weight: 50
+      - name: 新闻动态
+        url: news/
+        weight: 60
+      - name: 联系我们
+        url: contact/
+        weight: 70

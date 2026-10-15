@@ -1,0 +1,330 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# HUGO BLOX CONFIGURATION
+# Schema: hugoblox.com/schema/v2
+# Tutorial: https://docs.hugoblox.com/tutorial/
+# Documentation: https://docs.hugoblox.com/
+# ══════════════════════════════════════════════════════════════════════════════
+hugoblox:
+  schema: "2.0"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # IDENTITY
+  # Site-level branding (for people/profiles, use the author system in content/authors/)
+  # ────────────────────────────────────────────────────────────────────────────
+  identity:
+    # Site name - shown in navbar, footer, copyright, and browser title by default
+    name: "Zhao Lab"
+    # Legal entity for copyright notices (defaults to name if not set)
+    organization: "Great Bay University"
+    # Schema.org type for structured data
+    type: organization # person | organization | local_business
+    # Short tagline displayed on your site
+    tagline: "Design and Optimization of Intelligent Materials and Structures"
+    # Site meta description for search engines and social sharing
+    description: "Zhao Lab at the School of Advanced Engineering, Great Bay
+      University, researches the design and optimization of intelligent materials and
+      structures: computational mechanics, topology optimization, architected materials
+      and metamaterials, multifunctional materials, and physical intelligence."
+    # Social accounts (used for meta tags like Twitter Cards)
+    social:
+      twitter: "" # Twitter/X handle for Twitter Cards (without @)
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # THEME
+  # Color and visual design system
+  # ────────────────────────────────────────────────────────────────────────────
+  theme:
+    # Mode: 'light', 'dark', or 'system' (follows OS preference).
+    # Light is the intended presentation for the lab site; visitors can still
+    # switch to dark with the header toggle.
+    mode: light
+    # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
+    pack: "default"
+    # Optional: Override theme pack colors
+    colors:
+      primary: "#1d4e89" # Deep blue accent
+      secondary: ""
+      neutral: "" # Affects gray utilities (text-gray-*, bg-gray-*)
+    # Optional: Mode-specific color overrides
+    colors_light: {}
+    colors_dark: {}
+    # Optional: Semantic surface color overrides
+    surfaces:
+      background: ""
+      foreground: ""
+      header:
+        background: ""
+        foreground: ""
+      footer:
+        background: ""
+        foreground: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # TYPOGRAPHY
+  # Font and text sizing
+  # ────────────────────────────────────────────────────────────────────────────
+  typography:
+    # Theme pack: name from data/fonts/
+    # 'system' uses system fonts only (no Google Fonts requests) - reliable in mainland
+    # China and renders Chinese with native PingFang SC / Microsoft YaHei fallbacks.
+    pack: "system"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # LAYOUT
+  # Spacing and shape tokens
+  # ────────────────────────────────────────────────────────────────────────────
+  layout:
+    # Border radius: 'none', 'sm', 'md', 'lg', or 'full'
+    radius: "md"
+    # Spacing density: 'compact', 'comfortable', or 'spacious'
+    spacing: "spacious"
+    # Avatar shape in author profiles
+    avatar_shape: circle # circle | square | rounded
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # HEADER
+  # Site header and navigation bar
+  # ────────────────────────────────────────────────────────────────────────────
+  header:
+    enable: true
+    # Header style variant
+    style: navbar # navbar | navbar-simple | minimal
+    # Stick to top on scroll
+    sticky: true
+    # Menu alignment
+    align: center # left | center | right
+    # University logo (assets/media/logo.png) links to the GBU homepage;
+    # the brand name next to it still links to this site.
+    logo_url: "https://www.gbu.edu.cn/"
+    logo_title: "Great Bay University"
+    # Feature toggles
+    search: true
+    # Off: dark mode is disabled for this site (light-only presentation).
+    theme_toggle: false
+    # Off: the theme picker is a HugoBlox demo feature that lists preset palettes
+    # (Cupcake, Dracula, …) and is not appropriate for a lab site.
+    theme_picker: false
+    language_switcher: true
+    # Call-to-action button
+    cta:
+      enable: false
+      text: ""
+      url: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # FOOTER
+  # Site footer
+  # ────────────────────────────────────────────────────────────────────────────
+  footer:
+    # Footer style variant
+    style: minimal # minimal | columns | centered
+    language_switcher: true
+    # Custom footer text (HTML supported)
+    text: "School of Advanced Engineering, Great Bay University · zhaoz@gbu.edu.cn"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # COPYRIGHT
+  # Legal notices and licensing
+  # ────────────────────────────────────────────────────────────────────────────
+  copyright:
+    # Copyright notice - supports {year}, {name}, {license} placeholders
+    notice: "© {year} Zhao Lab, Great Bay University. This work is licensed under {license}"
+    license:
+      type: cc # cc | custom
+      allow_derivatives: false
+      share_alike: true
+      allow_commercial: false
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # SEO
+  # Search engine optimization - overrides and technical settings
+  # ────────────────────────────────────────────────────────────────────────────
+  seo:
+    # Browser tab title override (defaults to identity.name if not set)
+    title: ""
+    # For local_business identity type only
+    location:
+      address:
+        street: "16 Daxue Road, Songshan Lake High-Tech Industrial Development Zone"
+        city: "Dongguan"
+        region: "Guangdong"
+        postal_code: "523808"
+        country: "CN"
+      coordinates:
+        # WGS-84 (schema.org convention); the AMap block below uses GCJ-02.
+        latitude: 22.895778
+        longitude: 113.851297
+      phone: ""
+    # AI/LLM crawler guidance (llms.txt)
+    ai:
+      allow:
+        - /
+      disallow: []
+      note: "Guidance for AI crawlers - customize to match your public content."
+      contact: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # CONTENT
+  # Content rendering and behavior
+  # ────────────────────────────────────────────────────────────────────────────
+  content:
+    # Math rendering
+    math:
+      enable: true
+    # Table of contents
+    toc:
+      enable: true
+    # Reading time estimates
+    reading_time:
+      enable: true
+    # Academic citations
+    citations:
+      style: apa # apa | mla | chicago | ieee
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # SEARCH
+  # Site search
+  # ────────────────────────────────────────────────────────────────────────────
+  search:
+    enable: true
+    # Trending/suggested search terms
+    suggestions: []
+    # Quick action shortcuts in search modal
+    quick_actions: []
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # COMMENTS
+  # User comments system
+  # ────────────────────────────────────────────────────────────────────────────
+  comments:
+    enable: false
+    provider: "" # giscus | disqus
+    giscus:
+      repo: ""
+      repo_id: ""
+      category: ""
+      category_id: ""
+    disqus:
+      shortname: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # ANALYTICS
+  # Traffic and behavior analytics
+  # ────────────────────────────────────────────────────────────────────────────
+  analytics:
+    google:
+      measurement_id: "" # Google Analytics 4: G-XXXXXXXXXX
+    google_tag_manager:
+      container_id: "" # GTM-XXXXXXX
+    plausible:
+      domain: ""
+    fathom:
+      site_id: ""
+    pirsch:
+      site_id: ""
+    clarity:
+      project_id: ""
+    baidu:
+      site_id: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # VERIFICATION
+  # Search engine site verification codes
+  # ────────────────────────────────────────────────────────────────────────────
+  verification:
+    google: ""
+    bing: ""
+    baidu: ""
+    yandex: ""
+    pinterest: ""
+    naver: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # REPOSITORY
+  # Source code repository for "Edit this page" links
+  # ────────────────────────────────────────────────────────────────────────────
+  repository:
+    enable: false
+    url: "" # e.g., https://github.com/username/repo
+    branch: main
+    content_dir: content
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # LOCALE
+  # Regional formatting preferences
+  # ────────────────────────────────────────────────────────────────────────────
+  locale:
+    date_format: "Jan 2, 2006" # Go time format
+    time_format: "3:04 PM"
+    address_format: en-us
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # SECURITY
+  # Security headers and policies (requires Netlify integration)
+  # ────────────────────────────────────────────────────────────────────────────
+  security:
+    csp:
+      policy: ""
+      report_only: false
+    frame_options: allow # deny | sameorigin | allow - allow enables iframe embedding
+    permissions_policy: ""
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # PRIVACY
+  # Privacy and compliance features
+  # ────────────────────────────────────────────────────────────────────────────
+  privacy:
+    enable: false
+    anonymize_analytics: true
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # DEBUG
+  # Development and debugging (hidden in production)
+  # ────────────────────────────────────────────────────────────────────────────
+  debug:
+    enable: false
+    hud:
+      position: bottom-left # top-left | top-right | bottom-left | bottom-right
+      opacity: 1.0
+    export_logs: true
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # PREMIUM
+  # Premium features and creator program (affiliates)
+  # ────────────────────────────────────────────────────────────────────────────
+  pro:
+    # Hide "Powered by HugoBlox" attribution
+    # Requires: HugoBlox Premium to support HugoBlox via alternative means
+    # Note: Even with Premium, you can keep this false to support open source!
+    # Get Premium: https://hugoblox.com/premium
+    hide_attribution: false
+
+    # Affiliate referral code for rewards program
+    # Join affiliate program: https://hugoblox.com/affiliates
+    affiliate_code: ""
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CAMPUS MAP  (Zhao Lab custom block: layouts/_partials/hbx/blocks/amap)
+# ══════════════════════════════════════════════════════════════════════════════
+# The Contact page shows the campus location with AMap (高德地图).
+#
+# No key is shipped with this site. Until you fill in `amap_key`, the block
+# renders its no-key fallback: campus name + postal address + an "Open in AMap"
+# link (https://uri.amap.com), which needs no key.
+#
+# To switch on the interactive map:
+#   1. Apply for a free key at https://console.amap.com/dev/key/app
+#      — Platform/service: Web端 (JS API). Keys issued after 2021-12-02 also
+#        come with a "安全密钥" (security code).
+#   2. Paste them below and rebuild.
+#   3. In the AMap console set a Referer/domain whitelist for the key: a
+#      front-end key is visible in the page source, so the whitelist is what
+#      stops other sites from spending your quota.
+map:
+  provider: "amap"
+  amap_key: "Please apply for your own key at the AMap (高德) Open Platform and replace this placeholder"
+  amap_security_code: "" # AMap "安全密钥", required for keys created after 2021-12-02
+  # Songshan Lake campus (松山湖校区), GCJ-02 coordinates — the system AMap uses.
+  lng: 113.856272
+  lat: 22.892866
+  zoom: 15

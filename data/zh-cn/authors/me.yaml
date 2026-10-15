@@ -1,0 +1,108 @@
+# Chinese overrides for the PI profile.
+# Merged on top of data/authors/me.yaml (default/English) by the HugoBlox author system.
+# Only translated fields are listed here; links, dates, and other shared fields are inherited.
+name:
+  display: "赵志"
+  given: "志"
+  family: "赵"
+  alternate: "Zhi Zhao"
+role: "助理教授"
+bio: |
+  赵志，大湾区大学先进工程学院助理教授、研究员。研究聚焦先进功能材料与智能结构的设计优化，致力于发展面向力学及多物理场问题的逆向设计框架。课题组坚持"设计-制造-实验验证"贯通的研究思路，将理论计算、增材制造制备与实验表征紧密结合，推动基础研究成果向先进工程结构、软体机器人与生物医疗装备等实际应用场景落地转化。
+
+  加入大湾区大学之前，他于伊利诺伊大学厄巴纳-香槟分校（UIUC）从事博士后研究，并在该校获得土木工程博士学位。相关工作发表于 Science Advances、Advanced Functional Materials、npj Computational Materials、Journal of the Mechanics and Physics of Solids 等国际知名期刊，谷歌学术引用 1000 余次；以第一作者完成的论文曾获 ASME Henry Hess 青年发表奖（该奖项每年仅 1 篇）。
+
+affiliations:
+  - name: 大湾区大学先进工程学院
+    url: https://www.gbu.edu.cn/
+
+interests:
+  - 逆向设计与拓扑优化
+  - 构筑材料与力学超材料
+  - 磁-力耦合与多物理场系统
+  - 物理智能与智能结构
+
+education:
+  - degree: "土木工程 博士"
+    institution: "伊利诺伊大学厄巴纳-香槟分校"
+    year: "2019 – 2025"
+    start: "2019-08-01"
+    end: "2025-09-01"
+    summary: |
+      博士论文："磁驱动软材料的拓扑优化与物理实现：从可重构超材料到生物医疗机器人"（导师：Xiaojia Shelly Zhang 教授）
+  - degree: "土木工程 硕士"
+    institution: "同济大学"
+    year: "2016 – 2019"
+    start: "2016-09-01"
+    end: "2019-05-01"
+  - degree: "土木工程 学士"
+    institution: "同济大学"
+    year: "2012 – 2016"
+    start: "2012-09-01"
+    end: "2016-05-01"
+
+experience:
+  - role: "助理教授、研究员"
+    org: "大湾区大学先进工程学院"
+    start: "2026-09-01"
+    summary: |
+      Zhao Lab 负责人，开展智能材料与结构的设计优化研究。
+  - role: "博士后研究员"
+    org: "伊利诺伊大学厄巴纳-香槟分校"
+    start: "2025-10-01"
+    end: "2026-07-01"
+    summary: |
+      合作导师：Xiaojia Shelly Zhang 教授。
+
+awards:
+  - title: "ASME Henry Hess 青年发表奖（第一作者，该奖项每年仅 1 篇）"
+    awarder: "ASME"
+    date: "2025-01-01"
+  - title: "第 18 届美国计算力学大会（USNCCM）Travel Award"
+    awarder: "USACM"
+    date: "2025-01-01"
+  - title: "EMI 会议计算力学学生墙报竞赛三等奖"
+    awarder: "ASCE EMI"
+    date: "2024-01-01"
+  - title: "UIUC Loh Kwan Chen 杰出奖学金"
+    awarder: "伊利诺伊大学厄巴纳-香槟分校"
+    date: "2022-09-01"
+  - title: "IMECE 会议 NSF 学生科研墙报竞赛二等奖"
+    awarder: "ASME"
+    date: "2022-01-01"
+  - title: "USNCCM 16 材料、制造与优化方向最佳学生墙报"
+    awarder: "USACM"
+    date: "2021-01-01"
+  - title: "UIUC Graduate Fellowship"
+    awarder: "伊利诺伊大学厄巴纳-香槟分校"
+    date: "2019-08-01"
+  - title: "同济大学优秀毕业生"
+    awarder: "同济大学"
+    date: "2019-05-01"
+
+skills:
+  - name: "编程语言"
+    items:
+      - name: "MATLAB"
+      - name: "Python"
+  - name: "仿真软件"
+    items:
+      - name: "自研设计优化平台（MATLAB、FEniCSx）"
+      - name: "ABAQUS"
+      - name: "COMSOL"
+  - name: "实验技术"
+    items:
+      - name: "增材制造"
+      - name: "力学测试"
+      - name: "磁驱动"
+      - name: "电学测量"
+  - name: "文档与可视化"
+    items:
+      - name: "LaTeX"
+      - name: "Adobe Illustrator / Photoshop"
+      - name: "ParaView"
+      - name: "Premiere"
+
+languages:
+  - name: "中文（母语）"
+  - name: "英语（工作语言）"

@@ -1,0 +1,46 @@
+---
+title: Wind turbine tower failure modes under seismic and wind loads
+authors:
+  - Zhi Zhao
+  - K. Dai
+  - A. Camara
+  - G. Bitsuamlak
+  - C. Sheng
+author_notes:
+  - ""
+  - "* Corresponding author"
+  - ""
+  - ""
+  - ""
+date: "2019-04-01T00:00:00Z"
+publishDate: "2019-04-01T00:00:00Z"
+
+publication_types: ["article-journal"]
+
+publication:
+  name: Journal of Performance of Constructed Facilities
+  volume: 33
+  issue: "2"
+  pages: "04019015"
+
+peer_reviewed: true
+
+links:
+  - type: pdf
+    url: "/uploads/papers/jpcf-2019.pdf"
+  - type: doi
+    url: "https://doi.org/10.1061/(ASCE)CF.1943-5509.0001279"
+
+tags:
+  - Wind Turbine
+  - Failure Analysis
+
+featured: false
+
+---
+
+发表于 **Journal of Performance of Constructed Facilities**（卷 33，期 2，页码 04019015），2019 年。
+
+**DOI：** [10.1061/(ASCE)CF.1943-5509.0001279](https://doi.org/10.1061/(ASCE)CF.1943-5509.0001279)
+
+完整列表请见[论文发表](/zh-cn/publications/)页面。

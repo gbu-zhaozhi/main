@@ -1,0 +1,22 @@
+{{/* Load Hugo Blox - HBX resolver-based system
+     Blocks live in `blox/<block-id>/block.html` and are mounted to `layouts/_partials/hbx/blocks/<block-id>/block.html`.
+     Landing pages must specify `sections: [{ block: '<id>', ... }]`.
+
+     Local override: render a subtle divider between sections on the homepage
+     and on the Research overview (both languages). Publications renders its
+     own divider inside the journal-strip block, and Contact/Education keep
+     their blocks visually adjacent.
+*/}}
+{{/* Use unified sections source */}}
+{{- $sections := partial "hbx/sections.html" . -}}
+{{- $show_dividers := or $.IsHome (eq $.Section "research") -}}
+
+{{ range $index, $block := $sections }}
+  {{/* Do not show sections intended only for the demo site. */}}
+  {{ if or (not $block.demo) ($block.demo | and (eq (os.Getenv "HUGO_BLOX_DEMO") "true")) }}
+    {{ if and $show_dividers (gt $index 0) }}
+    <div class="hb-section-divider" role="separator" aria-hidden="true"></div>
+    {{ end }}
+    {{ partial "functions/parse_block_v3" (dict "page" $ "block" $block) }}
+  {{ end }}
+{{ end }}

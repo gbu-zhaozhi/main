@@ -1,0 +1,636 @@
+/* ==========================================================================
+   Zhao Lab — site overrides
+   Loaded by the theme automatically from assets/css/custom.css, after the
+   compiled Tailwind bundle.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CJK typography
+   The theme's font stack ends at generic `sans-serif`, so Chinese glyphs fall
+   back to whatever the OS picks. Declare an explicit, ordered CJK stack so
+   Simplified Chinese renders with the same high-quality face on macOS,
+   Windows, Linux and mobile, and give Chinese text slightly looser line
+   height and letter spacing for readability.
+   `html:root` (0,1,1) outranks the theme's `:root` (0,1,0) regardless of the
+   order the stylesheets end up in.
+   -------------------------------------------------------------------------- */
+html:root {
+  --hb-font-family-sans: "Inter var", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Source Han Sans SC",
+    "Noto Sans CJK SC", "WenQuanYi Micro Hei", "Helvetica Neue", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+/* Chinese pages: looser leading, and prevent awkward breaks inside Latin runs
+   embedded in Chinese sentences. */
+html[lang^="zh"] body {
+  line-height: 1.8;
+  text-underline-offset: 0.2em;
+}
+
+html[lang^="zh"] h1,
+html[lang^="zh"] h2,
+html[lang^="zh"] h3,
+html[lang^="zh"] h4 {
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
+/* Keep long Latin titles/DOIs from overflowing narrow mobile viewports. */
+.pub-list-item,
+.view-citation {
+  overflow-wrap: anywhere;
+}
+
+/* --------------------------------------------------------------------------
+   2. Laboratory aesthetic
+   Deep blue accent comes from hugoblox.theme.colors.primary (#1d4e89).
+   What follows is restraint: a quiet page ground, generous section rhythm,
+   and links that read as links without shouting.
+   -------------------------------------------------------------------------- */
+html:root {
+  --hb-color-background: #ffffff;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+/* Soften pure-black text slightly for long-form reading. */
+.prose {
+  color: #1f2937;
+}
+
+/* Section rhythm on landing pages. */
+.hbb-section {
+  scroll-margin-top: 5rem;
+}
+
+/* Headings: tighter tracking for a technical, precise feel. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+/* Images: never let a figure blow out its container on small screens. */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Publication list polish
+   -------------------------------------------------------------------------- */
+.view-citation {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+}
+
+.article-metadata li-cite-author,
+.li-cite-author {
+  font-weight: 500;
+}
+
+/* Author-note tooltip markers († equal contribution, * corresponding). */
+.author-notes {
+  vertical-align: baseline;
+}
+
+/* --------------------------------------------------------------------------
+   5. Campus map block (layouts/_partials/hbx/blocks/amap)
+   Two states, same layout: the interactive AMap canvas when a key is
+   configured, otherwise a quiet address card. Both share the meta block and
+   the "Open in AMap" link below the map.
+   -------------------------------------------------------------------------- */
+.hb-amap-canvas {
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background-color: #f1f5f9;
+}
+
+/* If the AMap SDK fails to load, hide the empty canvas and let the meta block
+   (address + link) stand on its own. */
+.hb-amap-canvas.hb-amap-unavailable {
+  display: none;
+}
+
+.hb-amap-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px dashed rgba(29, 78, 137, 0.35);
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.hb-amap-pin {
+  width: 34px;
+  height: 34px;
+  fill: #1d4e89;
+}
+
+/* Campus photo fallback for the map block (shown until an AMap key is set). */
+.hb-amap-photo {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(29, 78, 137, 0.18);
+  background: #f8fafc;
+}
+
+.hb-amap-photo .hb-amap-photo-link {
+  display: block;
+}
+
+.hb-amap-photo img {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.hb-amap-photo-link:hover img {
+  transform: scale(1.02);
+}
+
+html.dark .hb-amap-photo {
+  border-color: rgba(147, 197, 253, 0.25);
+  background: #172033;
+}
+
+/* Navbar: the university logo is its own link; keep it crisp and give it a
+   little breathing room from the brand title. */
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  object-fit: contain;
+}
+
+/* Light/dark logo swap: the university crest is dark blue, so a white variant
+   (assets/media/logo-white.png) takes over in dark mode. */
+.hb-logo-dark {
+  display: none;
+}
+
+html.dark .hb-logo-light {
+  display: none;
+}
+
+html.dark .hb-logo-dark {
+  display: inline-block;
+}
+
+.hb-amap-meta {
+  margin-top: 1rem;
+}
+
+.hb-amap-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.hb-amap-address {
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.hb-amap-actions {
+  margin-top: 0.75rem;
+}
+
+.hb-amap-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1d4e89;
+  border: 1px solid rgba(29, 78, 137, 0.35);
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.hb-amap-link:hover {
+  background-color: rgba(29, 78, 137, 0.08);
+  text-decoration: none;
+}
+
+/* Marker info window (content is injected by JS, so it needs real CSS). */
+.hb-amap-infowin {
+  max-width: 260px;
+  padding: 0.35rem 0.15rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.hb-amap-infowin-title {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.hb-amap-infowin-addr {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+html.dark .hb-amap-canvas {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #1e293b;
+}
+
+html.dark .hb-amap-fallback {
+  border-color: rgba(147, 197, 253, 0.35);
+  background: linear-gradient(180deg, #1e293b 0%, #172033 100%);
+}
+
+html.dark .hb-amap-pin {
+  fill: #93c5fd;
+}
+
+html.dark .hb-amap-name {
+  color: #f1f5f9;
+}
+
+html.dark .hb-amap-address {
+  color: #cbd5e1;
+}
+
+html.dark .hb-amap-link {
+  color: #bfdbfe;
+  border-color: rgba(191, 219, 254, 0.35);
+}
+
+html.dark .hb-amap-link:hover {
+  background-color: rgba(191, 219, 254, 0.12);
+}
+
+html.dark .hb-amap-infowin,
+html.dark .hb-amap-infowin-title {
+  color: #0f172a; /* AMap info windows keep a light surface in dark mode */
+}
+
+/* --------------------------------------------------------------------------
+   6. Full-bleed banner hero (lab-hero, layout: banner)
+   -------------------------------------------------------------------------- */
+.hb-hero-banner {
+  min-height: min(88vh, 860px);
+  display: flex;
+  align-items: center;
+  background-color: #0b1526; /* matches the dark banner while the image loads */
+}
+
+.hb-hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hb-hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 17, 34, 0.74) 0%,
+    rgba(7, 17, 34, 0.52) 45%,
+    rgba(7, 17, 34, 0.82) 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   7. Wider reading column on landing pages
+   The theme's markdown block caps text at max-w-prose (65ch); that reads as
+   cramped for section copy. Widen to max-w-4xl (~56rem).
+   -------------------------------------------------------------------------- */
+.hbb-section .max-w-prose {
+  max-width: 56rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. Publication list: figure thumbnail on the left
+   -------------------------------------------------------------------------- */
+.hb-pub-item {
+  display: flex;
+  gap: 1.15rem;
+  align-items: flex-start;
+}
+
+.hb-pub-thumb {
+  flex: 0 0 auto;
+  display: block;
+  width: 132px;
+  margin-top: 0.2rem;
+}
+
+.hb-pub-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.hb-pub-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+html.dark .hb-pub-thumb img {
+  border-color: #334155;
+}
+
+@media (max-width: 640px) {
+  .hb-pub-item {
+    gap: 0.8rem;
+  }
+  .hb-pub-thumb {
+    width: 88px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Journal logo strip (journal-strip block)
+   -------------------------------------------------------------------------- */
+.hb-journal-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2.25rem;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hb-journal-item {
+  margin: 0;
+  line-height: 0;
+}
+
+.hb-journal-item img {
+  height: 150px;
+  width: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  filter: saturate(0.9);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hb-journal-item img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+  filter: none;
+}
+
+html.dark .hb-journal-item img {
+  border-color: #334155;
+}
+
+@media (max-width: 640px) {
+  .hb-journal-item img {
+    height: 96px;
+  }
+}
+
+/* Divider between the journal strip and the publication list, and a tighter
+   seam: the theme gives every section 6rem of top+bottom padding, which left a
+   ~12rem blank band here. */
+.hb-journal-divider {
+  border: 0;
+  height: 1px;
+  width: min(64rem, 100%);
+  margin: 3rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(29, 78, 137, 0.35) 18%,
+    rgba(29, 78, 137, 0.35) 82%,
+    transparent
+  );
+}
+
+html.dark .hb-journal-divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(147, 197, 253, 0.4) 18%,
+    rgba(147, 197, 253, 0.4) 82%,
+    transparent
+  );
+}
+
+/* Divider between homepage sections (injected by the local
+   layouts/_partials/landing_page.html override). Same language as the
+   journal-strip divider above. */
+.hb-section-divider {
+  border: 0;
+  height: 1px;
+  width: min(64rem, calc(100% - 3rem));
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(29, 78, 137, 0.3) 18%,
+    rgba(29, 78, 137, 0.3) 82%,
+    transparent
+  );
+}
+
+/* Center inline images in page prose (e.g. the Education review figure),
+   which otherwise hug the left edge on the widened text column. */
+.page-body .prose img {
+  display: block;
+  margin-inline: auto;
+}
+
+#journals.hbb-section {
+  padding-bottom: 2.5rem;
+}
+
+#publications-list.hbb-section {
+  padding-top: 2.5rem;
+}
+
+/* The campus photo now opens the Contact page (it leads, contact details
+   follow). Collapse the seam between the two sections so the photo and the
+   details read as one block — each section carries 6rem of vertical padding
+   and the amap block adds its own py-16. */
+#campus.hbb-section {
+  padding-bottom: 2rem;
+}
+
+#contact.hbb-section {
+  padding-top: 0;
+}
+
+/* Research overview: lay the three direction cards out side by side. The
+   card view ships as a single-column list inside a 65ch container, which is
+   right for News but too narrow and too tall for three directions. */
+#research-areas .container.grid {
+  max-width: 72rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* News: two cards per row (still one column on phones). */
+#news-list .container.grid {
+  max-width: 64rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  #research-areas .container.grid,
+  #news-list .container.grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Team showcase
+   With a single member (PI only for now), centre the card instead of
+   leaving it in the first grid column.
+   -------------------------------------------------------------------------- */
+#pi .grid,
+#people .grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#pi .grid > *,
+#people .grid > * {
+  flex: 0 1 22rem;
+  width: 100%;
+  max-width: 22rem;
+}
+
+/* Centre the text inside each member card (name, role, bio, icons). */
+#pi .grid .p-6,
+#people .grid .p-6 {
+  text-align: center;
+}
+
+#pi .grid .p-6 .flex,
+#people .grid .p-6 .flex {
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   7. Header navigation
+   Slightly larger, more readable menu items.
+   -------------------------------------------------------------------------- */
+.navbar-nav .nav-link {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.navbar-brand {
+  font-size: 1.2rem;
+  font-weight: 600;
+  /* GBU brand blue — matches the university crest (13, 0, 178). */
+  color: #0d00b2;
+}
+
+html.dark .navbar-brand {
+  color: #f8fafc;
+}
+
+/* The homepage hero banner is a full-bleed image; drop the theme's 6rem
+   section padding so it sits flush against the header (no white gap). */
+#hero.hbb-section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. Banner hero title
+   White gradient with a soft drop shadow (filter, so it composites after the
+   background-clip and keeps the glyphs crisp on the dark banner image).
+   -------------------------------------------------------------------------- */
+.hb-hero-title {
+  filter: drop-shadow(0 2px 12px rgba(2, 6, 23, 0.55));
+}
+
+/* --------------------------------------------------------------------------
+   9. Team showcase header text
+   Centre the intro paragraph under People / 课题负责人 headings (the .prose
+   block is max-width:65ch and left-aligned by default).
+   -------------------------------------------------------------------------- */
+#people.hbb-section .prose,
+#pi.hbb-section .prose {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   10. One heading scale for the whole site
+   Every page/section title — single.html's h1, markdown-block titles, the map
+   and journal-strip headings, the focus-areas and team-showcase headings —
+   lands on 30px, 36px from the sm breakpoint up, whatever class the theme
+   happened to give it. `.hbb-section h2` (0,1,1) outranks the utility classes
+   (0,1,0), so no `!important` is needed.
+   -------------------------------------------------------------------------- */
+.hbb-section h2 {
+  font-size: 1.875rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 640px) {
+  .hbb-section h2 {
+    font-size: 2.25rem;
+  }
+}
+
+/* Titles set inside prose — the "## " headings in page bodies — step down from
+   there, so a body heading can never visually compete with the page title.
+   (0,2,1) so it still wins over the rule above. */
+.page-body .prose :is(h2) {
+  font-size: 1.35em;
+  line-height: 1.35;
+}
+
+.page-body .prose :is(h3) {
+  font-size: 1.15em;
+  line-height: 1.4;
+}
+
+.page-body .prose :is(h4) {
+  font-size: 1em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Motion
+   Respect users who ask for reduced motion.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

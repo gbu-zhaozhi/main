@@ -1,0 +1,250 @@
+{{/*
+  Zhao Lab: server-rendered Hero block (`lab-hero`).
+
+  Why this exists: the stock `hero` block is a Preact island, so its markup —
+  including the page's only <h1> — is emitted by JavaScript at runtime and is
+  absent from the built HTML. This variant renders the same design server-side
+  so the headline, lead paragraph and calls to action are present in the static
+  HTML for search engines, screen readers and no-JS clients.
+
+  Registered automatically: HugoBlox resolves `block: lab-hero` to
+  layouts/_partials/hbx/blocks/lab-hero/block.html. Tailwind scans every HTML
+  file under layouts/, so the utility classes below are compiled.
+
+  Content params:
+    eyebrow           Small uppercase line above the title
+    title             Headline; use [brackets] for a gradient-highlighted span
+    text              Lead paragraph (markdown)
+    primary_action    { text, url, style }  style: solid | outline
+    secondary_action  { text, url, style }
+    media             { src, alt }
+  Design params:
+    layout            centered | split
+    size              compact | default | tall
+*/}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+{{ $design := $block.design }}
+{{ if not (reflect.IsMap $design) }}{{ $design = dict }}{{ end }}
+
+{{/* ---------- text ---------- */}}
+{{ $eyebrow := "" }}
+{{ with index $content "eyebrow" }}{{ $eyebrow = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $text := "" }}
+{{ with index $content "text" }}{{ $text = $page.RenderString (printf "%v" .) }}{{ end }}
+
+{{ $motto := "" }}
+{{ with index $content "motto" }}{{ $motto = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $motto_sub := "" }}
+{{ with index $content "motto_sub" }}{{ $motto_sub = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{/* ---------- layout ---------- */}}
+{{ $split := false }}
+{{ $banner := false }}
+{{ $layout_raw := index $design "layout" }}
+{{ if eq (printf "%T" $layout_raw) "string" }}
+  {{ if eq (lower (strings.TrimSpace $layout_raw)) "split" }}{{ $split = true }}{{ end }}
+  {{ if eq (lower (strings.TrimSpace $layout_raw)) "banner" }}{{ $banner = true }}{{ end }}
+{{ end }}
+
+{{ $sizeClass := "py-24 sm:py-32 lg:py-40" }}
+{{ $size_raw := index $design "size" }}
+{{ if eq (printf "%T" $size_raw) "string" }}
+  {{ $size_key := lower (strings.TrimSpace $size_raw) }}
+  {{ if eq $size_key "compact" }}{{ $sizeClass = "py-16 sm:py-20 lg:py-24" }}
+  {{ else if eq $size_key "tall" }}{{ $sizeClass = "py-32 sm:py-48 lg:py-56" }}
+  {{ end }}
+{{ end }}
+
+{{/* ---------- actions ---------- */}}
+{{ $solidCls := "inline-flex items-center rounded-full bg-primary-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 transition-colors" }}
+{{ $outlineCls := "inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold ring-1 ring-inset ring-gray-300 dark:ring-gray-600 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/60 transition-colors" }}
+
+{{ $pa := dict }}
+{{ with index $content "primary_action" }}{{ if reflect.IsMap . }}{{ $pa = . }}{{ end }}{{ end }}
+{{ $sa := dict }}
+{{ with index $content "secondary_action" }}{{ if reflect.IsMap . }}{{ $sa = . }}{{ end }}{{ end }}
+
+{{ $pa_text := "" }}{{ with index $pa "text" }}{{ $pa_text = printf "%v" . }}{{ end }}
+{{ $pa_url := "" }}{{ with index $pa "url" }}{{ $pa_url = printf "%v" . }}{{ end }}
+{{ $pa_style := "solid" }}{{ with index $pa "style" }}{{ $pa_style = printf "%v" . }}{{ end }}
+{{ $sa_text := "" }}{{ with index $sa "text" }}{{ $sa_text = printf "%v" . }}{{ end }}
+{{ $sa_url := "" }}{{ with index $sa "url" }}{{ $sa_url = printf "%v" . }}{{ end }}
+{{ $sa_style := "outline" }}{{ with index $sa "style" }}{{ $sa_style = printf "%v" . }}{{ end }}
+
+{{/* ---------- media ---------- */}}
+{{ $img_src := "" }}
+{{ $img_srcset := "" }}
+{{ $img_w := "" }}
+{{ $img_h := "" }}
+{{ $alt := "" }}
+{{ with index $content "media" }}
+  {{ if reflect.IsMap . }}
+    {{ with index . "alt" }}{{ $alt = printf "%v" . }}{{ end }}
+    {{ $raw := "" }}
+    {{ with index . "src" }}{{ $raw = strings.TrimSpace (printf "%v" .) }}{{ end }}
+    {{ with $raw }}
+      {{ $normalized := strings.TrimPrefix "/" . }}
+      {{ $normalized = strings.TrimPrefix "./" $normalized }}
+      {{ $normalized = strings.TrimPrefix "assets/" $normalized }}
+      {{ $normalized = strings.TrimPrefix "media/" $normalized }}
+      {{ $normalized = path.Clean $normalized }}
+      {{ if and $normalized (ne $normalized ".") }}
+        {{ $res := false }}
+        {{ with $page }}{{ $res = (.Resources.ByType "image").GetMatch $normalized }}{{ end }}
+        {{ if not $res }}{{ $res = resources.Get (path.Join "media" $normalized) }}{{ end }}
+        {{ if $res }}
+          {{ if $banner }}
+            {{/* Full-bleed background: use the source image unprocessed. */}}
+            {{ $img_src = $res.RelPermalink }}
+            {{ $img_w = printf "%d" $res.Width }}
+            {{ $img_h = printf "%d" $res.Height }}
+          {{ else if reflect.IsImageResourceProcessable $res }}
+            {{ $w := 1400 }}
+            {{ $main := $res.Resize (printf "%dx" $w) }}
+            {{ $img_src = $main.RelPermalink }}
+            {{ $img_w = printf "%d" $main.Width }}
+            {{ $img_h = printf "%d" $main.Height }}
+            {{ $set := slice }}
+            {{ range (slice 640 900 1400) }}
+              {{ $r := $res.Resize (printf "%dx" .) }}
+              {{ $set = $set | append (printf "%s %dw" $r.RelPermalink $r.Width) }}
+            {{ end }}
+            {{ $img_srcset = delimit $set ", " }}
+          {{ else }}
+            {{ $img_src = $res.RelPermalink }}
+          {{ end }}
+        {{ else }}
+          {{ $img_src = (printf "/media/%s" $normalized) | relURL }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* ---------- title with [highlight] spans ---------- */}}
+{{ $HIGHLIGHT := "bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 dark:from-primary-400 dark:via-secondary-400 dark:to-primary-400 bg-clip-text text-transparent" }}
+{{ if $banner }}{{ $HIGHLIGHT = "hb-hero-title bg-gradient-to-b from-white via-white to-sky-200 bg-clip-text text-transparent" }}{{ end }}
+{{/* RE2 has no lookahead, so use a plain bracket match; these titles contain no markdown links. */}}
+{{ $titleHtml := $title }}
+{{ if $title }}
+  {{ $titleHtml = replaceRE `\[([^\]]+)\]` (printf "<span class=\"%s\">$1</span>" $HIGHLIGHT) (htmlEscape $title) }}
+{{ end }}
+
+{{/* ---------- banner layout: full-bleed dark hero ---------- */}}
+{{ if $banner }}
+{{ $banner_outline := "inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white ring-1 ring-inset ring-white/40 hover:bg-white/10 transition-colors" }}
+{{ $banner_solid := "inline-flex items-center rounded-full bg-primary-600 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-primary-500 transition-colors" }}
+<div class="hb-hero-banner relative isolate overflow-hidden">
+  {{ with $img_src }}
+  <img src="{{ . }}"{{ with $img_w }} width="{{ . }}"{{ end }}{{ with $img_h }} height="{{ . }}"{{ end }} alt="{{ $alt }}" fetchpriority="high" decoding="async" class="hb-hero-banner-bg">
+  {{ end }}
+  <div class="hb-hero-banner-overlay" aria-hidden="true"></div>
+
+  <div class="relative mx-auto w-full max-w-4xl px-6 py-28 text-center sm:py-36 lg:py-44">
+    {{ with $eyebrow }}
+    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-white/75 sm:text-base">{{ . }}</p>
+    {{ end }}
+    {{ with $title }}
+    <h1 class="mt-5 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">{{ $titleHtml | safeHTML }}</h1>
+    {{ end }}
+    {{ with $motto }}
+    <p class="mt-6 text-2xl font-semibold tracking-wide text-white sm:text-3xl lg:text-4xl">{{ . }}</p>
+    {{ end }}
+    {{ with $motto_sub }}
+    <p class="mt-2 text-base tracking-widest text-white/70 sm:text-lg">{{ . }}</p>
+    {{ end }}
+    {{ with $text }}
+    <div class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/85 sm:text-xl">{{ . | safeHTML }}</div>
+    {{ end }}
+    {{ if or $pa_url $sa_url }}
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+      {{ if and $pa_url $pa_text }}
+      <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $banner_outline }}{{ else }}{{ $banner_solid }}{{ end }}">{{ $pa_text }}</a>
+      {{ end }}
+      {{ if and $sa_url $sa_text }}
+      <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $banner_solid }}{{ else }}{{ $banner_outline }}{{ end }}">{{ $sa_text }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ else }}
+
+<div class="{{ $sizeClass }}">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    {{ if $split }}
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="text-left">
+        {{ with $eyebrow }}
+        <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">{{ . }}</p>
+        {{ end }}
+        {{ with $title }}
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">{{ $titleHtml | safeHTML }}</h1>
+        {{ end }}
+        {{ with $text }}
+        <div class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">{{ . | safeHTML }}</div>
+        {{ end }}
+        {{ if or $pa_url $sa_url }}
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          {{ if and $pa_url $pa_text }}
+          <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
+          {{ end }}
+          {{ if and $sa_url $sa_text }}
+          <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ with $img_src }}
+      <div class="relative">
+        <img src="{{ . }}"{{ with $img_srcset }} srcset="{{ . }}" sizes="(max-width: 1024px) 100vw, 50vw"{{ end }}{{ with $img_w }} width="{{ . }}"{{ end }}{{ with $img_h }} height="{{ . }}"{{ end }}
+             alt="{{ $alt }}" loading="eager" decoding="async"
+             class="w-full h-auto rounded-2xl shadow-2xl ring-1 ring-gray-900/10 dark:ring-white/10">
+      </div>
+      {{ end }}
+    </div>
+
+    {{ else }}
+    <div class="mx-auto max-w-3xl text-center">
+      {{ with $eyebrow }}
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">{{ . }}</p>
+      {{ end }}
+      {{ with $title }}
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-6xl">{{ $titleHtml | safeHTML }}</h1>
+      {{ end }}
+      {{ with $text }}
+      <div class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">{{ . | safeHTML }}</div>
+      {{ end }}
+      {{ if or $pa_url $sa_url }}
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+        {{ if and $pa_url $pa_text }}
+        <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
+        {{ end }}
+        {{ if and $sa_url $sa_text }}
+        <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+      {{ with $img_src }}
+      <div class="relative mt-12">
+        <img src="{{ . }}"{{ with $img_srcset }} srcset="{{ . }}" sizes="100vw"{{ end }}{{ with $img_w }} width="{{ . }}"{{ end }}{{ with $img_h }} height="{{ . }}"{{ end }}
+             alt="{{ $alt }}" loading="eager" decoding="async"
+             class="w-full h-auto rounded-2xl shadow-2xl ring-1 ring-gray-900/10 dark:ring-white/10">
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+
+  </div>
+</div>
+{{ end }}
