@@ -45,4 +45,4 @@ featured: false
 
 Published in **Engineering Structures** (volume 196, pages 109294), 2019.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

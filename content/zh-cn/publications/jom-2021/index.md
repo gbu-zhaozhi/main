@@ -36,4 +36,4 @@ featured: false
 
 **DOI：** [10.1007/s11837-021-04705-y](https://doi.org/10.1007/s11837-021-04705-y)
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

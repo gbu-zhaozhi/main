@@ -37,4 +37,4 @@ featured: false
 
 **DOI：** [10.1007/s00158-021-02870-x](https://doi.org/10.1007/s00158-021-02870-x)
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

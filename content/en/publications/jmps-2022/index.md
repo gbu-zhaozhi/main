@@ -35,4 +35,4 @@ featured: true
 
 Published in **Journal of the Mechanics and Physics of Solids** (volume 158, pages 104628), 2022.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

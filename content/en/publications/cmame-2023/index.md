@@ -36,4 +36,4 @@ featured: false
 
 Published in **Computer Methods in Applied Mechanics and Engineering** (volume 413, pages 116065), 2023.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

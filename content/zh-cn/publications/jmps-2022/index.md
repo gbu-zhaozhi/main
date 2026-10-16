@@ -35,4 +35,4 @@ featured: true
 
 发表于 **Journal of the Mechanics and Physics of Solids**（卷 158，页码 104628），2022 年。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

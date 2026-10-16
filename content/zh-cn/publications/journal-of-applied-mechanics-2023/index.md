@@ -44,4 +44,4 @@ featured: true
 
 **奖项：** ASME Henry Hess Early Career Publication Award.
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

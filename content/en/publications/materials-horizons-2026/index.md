@@ -34,4 +34,4 @@ featured: true
 
 Published in **Materials Horizons**, 2026. In press.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

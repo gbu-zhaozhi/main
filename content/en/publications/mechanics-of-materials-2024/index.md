@@ -36,4 +36,4 @@ featured: true
 
 Published in **Mechanics of Materials** (volume 198, pages 105089), 2024.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

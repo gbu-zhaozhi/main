@@ -36,4 +36,4 @@ Published in **JOM** (volume 73, pages 2022–2030), 2021.
 
 **DOI:** [10.1007/s11837-021-04705-y](https://doi.org/10.1007/s11837-021-04705-y)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

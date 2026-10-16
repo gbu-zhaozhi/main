@@ -42,4 +42,4 @@ Published in **Structural and Multidisciplinary Optimization** (volume 64, pages
 
 **DOI:** [10.1007/s00158-021-03050-7](https://doi.org/10.1007/s00158-021-03050-7)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

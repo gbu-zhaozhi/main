@@ -43,4 +43,4 @@ Published in **Journal of Performance of Constructed Facilities** (volume 33, is
 
 **DOI:** [10.1061/(ASCE)CF.1943-5509.0001279](https://doi.org/10.1061/(ASCE)CF.1943-5509.0001279)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

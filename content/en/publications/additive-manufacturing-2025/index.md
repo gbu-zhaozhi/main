@@ -43,4 +43,4 @@ featured: false
 
 Published in **Additive Manufacturing** (volume 105, pages 104770), 2025.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

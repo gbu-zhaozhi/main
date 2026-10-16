@@ -1,0 +1,191 @@
+{{/* Zhao Lab custom block: contact-form
+     A bilingual "leave a message" form. On submit the visitor's message is
+     pushed straight to the PI's WeChat via Server酱 (sctapi.ftqq.com,
+     default) or PushPlus (pushplus.plus) — both APIs allow browser CORS
+     calls, so no backend is needed on this static site.
+
+     Credentials live in the page front matter so the site owner never has
+     to touch this template:
+
+       sections:
+         - block: contact-form
+           id: message
+           content:
+             provider: serverchan   # serverchan (default) | pushplus
+             sendkey: 'YOUR_SENDKEY_OR_TOKEN'
+
+     Anti-spam: hidden honeypot field + 60s client-side cooldown per browser.
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+{{ $provider := index $content "provider" | default "serverchan" | lower }}
+{{ $sendkey := index $content "sendkey" | default "" }}
+{{ $isZh := eq $page.Language.Lang "zh-cn" }}
+
+<div class="flex flex-col items-center max-w-4xl w-full mx-auto gap-3 justify-center px-6">
+
+  <div class="mb-6 text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+    {{ if $isZh }}在线留言{{ else }}Leave a Message{{ end }}
+  </div>
+
+  <p class="hb-msg-intro">
+    {{ if $isZh }}提交后将直接推送到课题组负责人的微信，我们会尽快回复。也可以直接发送邮件至 <a href="mailto:zhaoz@gbu.edu.cn">zhaoz@gbu.edu.cn</a>。{{ else }}Your message will be pushed straight to the PI's WeChat and we will reply as soon as possible. You can also e-mail <a href="mailto:zhaoz@gbu.edu.cn">zhaoz@gbu.edu.cn</a> directly.{{ end }}
+  </p>
+
+  <form id="hb-msg-form" class="hb-msg-form" novalidate
+        data-provider="{{ $provider }}" data-key="{{ $sendkey }}">
+    <div class="hb-msg-row">
+      <div class="hb-msg-field">
+        <label for="hb-msg-name">{{ if $isZh }}称呼{{ else }}Your name{{ end }}</label>
+        <input class="hb-msg-input" type="text" id="hb-msg-name" name="hb_name"
+               maxlength="50" autocomplete="name"
+               placeholder="{{ if $isZh }}怎么称呼您{{ else }}How should we address you{{ end }}" required>
+      </div>
+      <div class="hb-msg-field">
+        <label for="hb-msg-email">{{ if $isZh }}邮箱（选填）{{ else }}E-mail (optional){{ end }}</label>
+        <input class="hb-msg-input" type="email" id="hb-msg-email" name="hb_email"
+               maxlength="100" autocomplete="email"
+               placeholder="{{ if $isZh }}方便我们回复您{{ else }}So we can reply to you{{ end }}">
+      </div>
+    </div>
+    <div class="hb-msg-field">
+      <label for="hb-msg-body">{{ if $isZh }}留言内容{{ else }}Message{{ end }}</label>
+      <textarea class="hb-msg-input hb-msg-textarea" id="hb-msg-body" name="hb_body"
+                maxlength="1000" rows="5" required
+                placeholder="{{ if $isZh }}请简要描述您想咨询或讨论的内容{{ else }}Please briefly describe your enquiry{{ end }}"></textarea>
+    </div>
+    {{/* Honeypot: real visitors never see or fill this field */}}
+    <div class="hb-msg-hp" aria-hidden="true">
+      <label for="hb-msg-nick">Nickname</label>
+      <input type="text" id="hb-msg-nick" name="hb_nickname" tabindex="-1" autocomplete="off">
+    </div>
+    <button type="submit" class="hb-msg-btn" id="hb-msg-submit">
+      {{ if $isZh }}发送留言{{ else }}Send message{{ end }}
+    </button>
+    <p class="hb-msg-status" id="hb-msg-status" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('hb-msg-form');
+  if (!form || form.dataset.bound) return;
+  form.dataset.bound = '1';
+
+  var provider = form.dataset.provider || 'serverchan';
+  var key = (form.dataset.key || '').trim();
+  var btn = document.getElementById('hb-msg-submit');
+  var status = document.getElementById('hb-msg-status');
+  var isZh = {{ if $isZh }}true{{ else }}false{{ end }};
+  var COOLDOWN_MS = 60000;
+  var LS_KEY = 'hb-msg-last-send';
+
+  function say(kind, text) {
+    status.className = 'hb-msg-status hb-msg-' + kind;
+    status.textContent = text;
+  }
+
+  function cooldownLeft() {
+    try {
+      var t = parseInt(localStorage.getItem(LS_KEY) || '0', 10);
+      return Math.max(0, t + COOLDOWN_MS - Date.now());
+    } catch (e) { return 0; }
+  }
+
+  function armCooldown() {
+    try { localStorage.setItem(LS_KEY, String(Date.now())); } catch (e) {}
+    var left = Math.ceil(COOLDOWN_MS / 1000);
+    btn.disabled = true;
+    var tick = setInterval(function () {
+      left--;
+      if (left <= 0) {
+        clearInterval(tick);
+        btn.disabled = false;
+        btn.textContent = isZh ? '发送留言' : 'Send message';
+      } else {
+        btn.textContent = (isZh ? '请稍候（' : 'Please wait (') + left + (isZh ? ' 秒）' : 's)');
+      }
+    }, 1000);
+  }
+
+  function send() {
+    var name = document.getElementById('hb-msg-name').value.trim();
+    var email = document.getElementById('hb-msg-email').value.trim();
+    var body = document.getElementById('hb-msg-body').value.trim();
+    /* Honeypot filled in -> silently pretend success to bots */
+    if (document.getElementById('hb-msg-nick').value) {
+      say('ok', isZh ? '已收到您的留言，我们将尽快与您联系！' : 'Message received — we will get back to you soon!');
+      return;
+    }
+    if (!name || !body) {
+      say('err', isZh ? '请填写称呼和留言内容。' : 'Please fill in your name and the message.');
+      return;
+    }
+    if (!key || key.indexOf('PUT_YOUR') === 0) {
+      say('err', isZh
+        ? '表单服务尚未配置，请暂时通过邮箱 zhaoz@gbu.edu.cn 联系我们。'
+        : 'The form service is not configured yet — please reach us at zhaoz@gbu.edu.cn for now.');
+      return;
+    }
+
+    var title = (isZh ? '【网站留言】' : '[Website message] ') + name;
+    var desp = '**' + (isZh ? '称呼' : 'Name') + ':** ' + name + '  \n'
+             + '**' + (isZh ? '邮箱' : 'E-mail') + ':** ' + (email || (isZh ? '未填写' : 'not provided')) + '  \n'
+             + '**' + (isZh ? '语言' : 'Language') + ':** ' + (isZh ? '中文页' : 'English page') + '  \n\n'
+             + '**' + (isZh ? '内容' : 'Message') + ':**  \n' + body + '  \n\n'
+             + '---  \n' + new Date().toLocaleString();
+
+    btn.disabled = true;
+    say('busy', isZh ? '正在发送…' : 'Sending…');
+
+    var p;
+    if (provider === 'pushplus') {
+      p = fetch('https://www.pushplus.plus/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: key, title: title, content: desp, template: 'markdown' })
+      });
+    } else {
+      p = fetch('https://sctapi.ftqq.com/' + encodeURIComponent(key) + '.send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ title: title, desp: desp })
+      });
+    }
+
+    p.then(function (r) { return r.json(); })
+      .then(function (data) {
+        var ok = (provider === 'pushplus') ? (data && data.code === 200)
+                                            : (data && data.code === 0);
+        if (ok) {
+          form.reset();
+          armCooldown();
+          say('ok', isZh ? '已收到您的留言，我们将尽快与您联系！'
+                         : 'Message received — we will get back to you soon!');
+        } else {
+          throw new Error('push api error');
+        }
+      })
+      .catch(function () {
+        say('err', isZh
+          ? '发送失败，请稍后重试，或直接发邮件至 zhaoz@gbu.edu.cn。'
+          : 'Failed to send — please try again later, or e-mail zhaoz@gbu.edu.cn directly.');
+      })
+      .finally(function () {
+        /* Keep the button disabled while the anti-spam cooldown is running */
+        if (cooldownLeft() <= 0) btn.disabled = false;
+      });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (cooldownLeft() > 0) {
+      say('err', isZh ? '发送过于频繁，请稍后再试。' : 'You are sending too fast — please wait a moment.');
+      return;
+    }
+    send();
+  });
+})();
+</script>

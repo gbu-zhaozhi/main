@@ -38,4 +38,4 @@ Published in **Advanced Functional Materials** (volume 36, issue 44, pages e0006
 
 **DOI:** [10.1002/adfm.202600068](https://doi.org/10.1002/adfm.202600068)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

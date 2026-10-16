@@ -46,4 +46,4 @@ featured: true
 
 **DOI：** [10.1002/advs.202308619](https://doi.org/10.1002/advs.202308619)
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

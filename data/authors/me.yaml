@@ -37,8 +37,11 @@ links:
     url: mailto:zhaoz@gbu.edu.cn
     label: E-mail
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/citations?user=945Ut_wAAAAJ
+    url: https://scholar.google.com/citations?user=97AQtN4AAAAJ&hl=en
     label: Google Scholar
+  - icon: academicons/researchgate
+    url: https://www.researchgate.net/profile/Zhi-Zhao-10
+    label: ResearchGate
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/zhi-zhao-1648791a3/
     label: LinkedIn

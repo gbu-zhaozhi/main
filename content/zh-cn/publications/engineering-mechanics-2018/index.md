@@ -38,4 +38,4 @@ featured: false
 
 发表于 **Engineering Mechanics**（卷 35，期 S1，页码 293–299），2018 年。中文期刊论文。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

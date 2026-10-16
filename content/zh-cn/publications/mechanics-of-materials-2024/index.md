@@ -36,4 +36,4 @@ featured: true
 
 发表于 **Mechanics of Materials**（卷 198，页码 105089），2024 年。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

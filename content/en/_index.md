@@ -14,11 +14,11 @@ sections:
       text: 'We develop inverse design frameworks for mechanics and multiphysics problems, connecting theory, computation, additive manufacturing, and experimental validation — toward intelligent materials and structures.'
       primary_action:
         text: 'Explore our research'
-        url: '/research/'
+        url: '/en/research/'
         style: 'solid'
       secondary_action:
         text: 'Join the lab'
-        url: '/openings/'
+        url: '/en/openings/'
         style: 'outline'
       media:
         type: 'image'
@@ -42,6 +42,17 @@ sections:
 
         Our scientific identity is rooted in **mechanics and computational design**, and extends into advanced materials, coupled multiphysics, and physically intelligent structures.
 
+        <p class="hb-sp-intro">You can also find us on social media — scan the QR codes to follow the lab on <strong>RED (Xiaohongshu)</strong> and <strong>Douyin</strong>, or reach us via Google Scholar, e-mail, or ResearchGate.</p>
+        <div class="hb-sp-links">
+          <a class="hb-sp-link" href="https://scholar.google.com/citations?user=97AQtN4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></span><span class="hb-sp-label">Google Scholar</span></a>
+          <a class="hb-sp-link" href="mailto:zhaoz@gbu.edu.cn"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span class="hb-sp-label">E-mail</span></a>
+          <a class="hb-sp-link" href="https://www.researchgate.net/profile/Zhi-Zhao-10" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><text x="12" y="17" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Georgia,serif" fill="currentColor">RG</text></svg></span><span class="hb-sp-label">ResearchGate</span></a>
+        </div>
+        <div class="hb-sp-qrs">
+          <figure class="hb-sp-qr"><img src="/uploads/qr-xiaohongshu.png" alt="Xiaohongshu (RED) QR code" loading="lazy"><figcaption>RED</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="/uploads/qr-douyin.png" alt="Douyin QR code" loading="lazy"><figcaption>Douyin</figcaption></figure>
+        </div>
+
   - block: focus-areas
     id: research
     content:
@@ -52,7 +63,7 @@ sections:
         - name: 'Architected Materials and Metamaterials'
           description: 'Materials and structures with programmable nonlinear responses, multistability, buckling, and tunable mechanical properties.'
           image: 'research/area-b.jpg'
-          url: '/research/architected-materials/'
+          url: '/en/research/architected-materials/'
           cta_text: 'Learn more'
           topics:
             - Metamaterials
@@ -62,7 +73,7 @@ sections:
         - name: 'Multifunctional Materials and Structures'
           description: 'Magneto-mechanical and magneto-electro-mechanical coupling, programmable actuation, sensing, and multifunctional mechanical systems.'
           image: 'research/area-c.jpg'
-          url: '/research/multifunctional-materials/'
+          url: '/en/research/multifunctional-materials/'
           cta_text: 'Learn more'
           topics:
             - Magneto-mechanics
@@ -72,7 +83,7 @@ sections:
         - name: 'Physical Intelligence and Advanced Applications'
           description: 'Intelligent structures, soft robotic systems, and biomedical devices that combine mechanical adaptability, actuation, and sensing.'
           image: 'research/area-d.jpg'
-          url: '/research/physical-intelligence/'
+          url: '/en/research/physical-intelligence/'
           cta_text: 'Learn more'
           topics:
             - Intelligent structures
@@ -85,7 +96,7 @@ sections:
     id: publications
     content:
       title: 'Featured Publications'
-      text: 'Selected papers from the group. See the [Publications](/publications/) page for the complete list.'
+      text: 'Selected papers from the group. See the [Publications](/en/publications/) page for the complete list.'
       count: 4
       filters:
         folders:
@@ -101,14 +112,14 @@ sections:
     content:
       title: 'People'
       subtitle: 'Principal Investigator'
-      text: 'Zhao Lab is led by Assistant Professor Zhi Zhao. Postdoctoral, PhD, Master’s and undergraduate researchers will join as the group grows — see [Openings](/openings/).'
+      text: 'Zhao Lab is led by Assistant Professor Zhi Zhao. Postdoctoral, PhD, Master’s and undergraduate researchers will join as the group grows — see [Openings](/en/openings/).'
       user_groups:
         - name: 'Principal Investigator'
       sort_by: 'weight'
       sort_ascending: true
       cta:
         text: 'Meet the team'
-        url: '/people/'
+        url: '/en/people/'
     design:
       max_columns: 3
 
@@ -123,5 +134,5 @@ sections:
 
         Interested applicants are invited to contact **zhaoz@gbu.edu.cn** with a CV and a short statement of research interests.
 
-        [Read the full call →](/openings/)
+        [Read the full call →](/en/openings/)
 ---

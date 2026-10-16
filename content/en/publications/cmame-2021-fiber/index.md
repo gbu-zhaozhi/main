@@ -39,4 +39,4 @@ Published in **Computer Methods in Applied Mechanics and Engineering** (volume 3
 
 **DOI:** [10.1016/j.cma.2020.113496](https://doi.org/10.1016/j.cma.2020.113496)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

@@ -43,4 +43,4 @@ featured: false
 
 发表于 **Additive Manufacturing**（卷 105，页码 104770），2025 年。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

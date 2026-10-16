@@ -48,7 +48,7 @@ sections:
     id: selected-publications
     content:
       title: Representative Publications
-      text: 'Selected papers. See the [Publications](/publications/) page for the complete list.'
+      text: 'Selected papers. See the [Publications](/en/publications/) page for the complete list.'
       count: 6
       filters:
         folders:

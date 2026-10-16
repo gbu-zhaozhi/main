@@ -1,6 +1,6 @@
 # Languages
-#   English is the default language (served at the site root).
-#   Simplified Chinese is served under /zh-cn/ and selectable via the header language switcher.
+#   Simplified Chinese is the default language (served at the site root).
+#   English is served under /en/ and selectable via the header language switcher.
 #   Documentation: https://docs.hugoblox.com/reference/language/
 
 en:
@@ -8,14 +8,14 @@ en:
   contentDir: content/en
   title: Zhao Lab
   locale: en-us
-  weight: 1
+  weight: 2
 
 zh-cn:
   label: 中文
   contentDir: content/zh-cn
   title: Zhao Lab
   locale: zh-CN
-  weight: 2
+  weight: 1
   params:
     hugoblox:
       identity:
@@ -48,6 +48,6 @@ zh-cn:
       - name: 新闻动态
         url: news/
         weight: 60
-      - name: 联系我们
+      - name: 联系信息
         url: contact/
         weight: 70

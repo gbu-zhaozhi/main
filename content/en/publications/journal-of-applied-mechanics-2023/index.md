@@ -44,4 +44,4 @@ Published in **Journal of Applied Mechanics** (volume 90, issue 9, pages 091006)
 
 **Award:** ASME Henry Hess Early Career Publication Award.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

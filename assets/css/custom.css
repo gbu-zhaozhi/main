@@ -445,17 +445,14 @@ html.dark .hb-journal-divider {
    layouts/_partials/landing_page.html override). Same language as the
    journal-strip divider above. */
 .hb-section-divider {
-  border: 0;
-  height: 1px;
-  width: min(64rem, calc(100% - 3rem));
+  display: block;
+  flex: none;
+  height: 0;
+  width: calc(100% - 3rem);
+  max-width: 64rem;
   margin: 0 auto;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(29, 78, 137, 0.3) 18%,
-    rgba(29, 78, 137, 0.3) 82%,
-    transparent
-  );
+  border: 0;
+  border-top: 2px solid rgba(13, 0, 178, 0.25);
 }
 
 /* Center inline images in page prose (e.g. the Education review figure),
@@ -463,6 +460,138 @@ html.dark .hb-journal-divider {
 .page-body .prose img {
   display: block;
   margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Social panel (custom `social-panel` block) — sits on the light page body
+   right below the Welcome section: a row of link pills, then the QR cards.
+   -------------------------------------------------------------------------- */
+/* Social media area — now inlined at the foot of the Welcome markdown
+   (prose), so it sits inside the Welcome section with NO divider between.
+   The overrides below neutralise prose defaults for the injected markup. */
+.page-body .prose .hb-sp-intro,
+.hb-sp-intro {
+  text-align: center;
+  color: #4b5563;
+  font-size: 1rem;
+  max-width: 42rem;
+  margin: 2.25rem auto 0;
+}
+
+.page-body .prose .hb-sp-links,
+.hb-sp-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.page-body .prose a.hb-sp-link,
+.hb-sp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(13, 0, 178, 0.18);
+  box-shadow: 0 1px 4px rgba(13, 0, 178, 0.06);
+  text-decoration: none;
+  color: #1f2937;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.page-body .prose a.hb-sp-link:hover,
+.hb-sp-link:hover,
+.hb-sp-link:focus-visible {
+  border-color: rgba(13, 0, 178, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 0, 178, 0.12);
+  color: #1f2937;
+}
+
+.page-body .prose a.hb-sp-link .hb-sp-icon,
+.hb-sp-icon {
+  display: inline-flex;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: #0d00b2;
+}
+
+.hb-sp-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.page-body .prose a.hb-sp-link .hb-sp-label,
+.hb-sp-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.page-body .prose .hb-sp-qrs,
+.hb-sp-qrs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.25rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.page-body .prose figure.hb-sp-qr,
+.hb-sp-qr {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  padding: 9px 9px 7px;
+  border: 1px solid rgba(13, 0, 178, 0.10);
+  box-shadow: 0 3px 12px rgba(13, 0, 178, 0.09);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 0;
+}
+
+.page-body .prose figure.hb-sp-qr:hover,
+.hb-sp-qr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 0, 178, 0.14);
+}
+
+.page-body .prose .hb-sp-qr img,
+.hb-sp-qr img {
+  display: block;
+  width: 132px;
+  height: 132px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.page-body .prose .hb-sp-qr figcaption,
+.hb-sp-qr figcaption {
+  margin-top: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .hb-sp-qrs {
+    gap: 1.25rem;
+  }
+  .page-body .prose .hb-sp-qr img,
+  .hb-sp-qr img {
+    width: 112px;
+    height: 112px;
+  }
 }
 
 #journals.hbb-section {
@@ -473,16 +602,151 @@ html.dark .hb-journal-divider {
   padding-top: 2.5rem;
 }
 
-/* The campus photo now opens the Contact page (it leads, contact details
-   follow). Collapse the seam between the two sections so the photo and the
-   details read as one block — each section carries 6rem of vertical padding
-   and the amap block adds its own py-16. */
-#campus.hbb-section {
-  padding-bottom: 2rem;
+/* Contact page: the three blocks (message form, campus photo, contact
+   details) are now separated by the standard .hb-section-divider, so no
+   seam stitching is needed — every section keeps its normal padding.
+   The "校园 / Campus" heading renders centred like the other section
+   titles on the page (the amap block's own h2 is left-aligned). */
+#campus.hbb-section h2 {
+  text-align: center;
 }
 
-#contact.hbb-section {
-  padding-top: 0;
+/* (Hero social badges were moved into the light `social-panel` block below
+   the Welcome section — see .hb-sp-* above.) */
+
+/* --------------------------------------------------------------------------
+   Contact form (custom `contact-form` block)
+   Messages are pushed to WeChat via Server酱/PushPlus straight from the
+   browser; styles kept here (not Tailwind utilities) so they survive
+   Tailwind's content scanning untouched.
+   -------------------------------------------------------------------------- */
+
+.hb-msg-intro {
+  max-width: 40rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.hb-msg-intro a {
+  color: #0D00B2;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.hb-msg-form {
+  max-width: 40rem;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.hb-msg-row {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 640px) {
+  .hb-msg-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.hb-msg-field {
+  display: grid;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.hb-msg-field label {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.hb-msg-input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111827;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hb-msg-input:focus {
+  outline: none;
+  border-color: #0D00B2;
+  box-shadow: 0 0 0 3px rgba(13, 0, 178, 0.12);
+}
+
+.hb-msg-textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+/* Honeypot — invisible to humans, irresistible to bots */
+.hb-msg-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.hb-msg-btn {
+  justify-self: center;
+  min-width: 10rem;
+  background: #0D00B2;
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.7rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.hb-msg-btn:hover:not(:disabled) {
+  background: #1a14c9;
+}
+
+.hb-msg-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.hb-msg-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.hb-msg-status {
+  text-align: center;
+  font-size: 0.95rem;
+  min-height: 1.4em;
+  margin: 0;
+}
+
+.hb-msg-status:empty {
+  display: none;
+}
+
+.hb-msg-ok {
+  color: #15803d;
+}
+
+.hb-msg-err {
+  color: #b91c1c;
+}
+
+.hb-msg-busy {
+  color: #6b7280;
 }
 
 /* Research overview: lay the three direction cards out side by side. The

@@ -14,4 +14,4 @@ We welcome applicants with backgrounds in mechanics, mechanical engineering, civ
 
 Interested applicants may e-mail **zhaoz@gbu.edu.cn** with a CV and a short statement of research interests.
 
-See the [Openings](/openings/) page for details.
+See the [Openings](/en/openings/) page for details.

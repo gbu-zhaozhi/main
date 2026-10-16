@@ -38,4 +38,4 @@ Published in **npj Computational Materials** (volume 9, issue 57, pages 1–11),
 
 **DOI:** [10.1038/s41524-023-00980-2](https://doi.org/10.1038/s41524-023-00980-2)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

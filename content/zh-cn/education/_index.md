@@ -16,5 +16,5 @@ sections:
 
         该综述为赵志在伊利诺伊大学厄巴纳-香槟分校（UIUC）攻读博士期间，与 X. Shelly Zhang 教授课题组及合作者共同完成，系统梳理了结构与多学科优化领域的教育教学论文，并汇总了可用于优化课程教学的公开代码与教学资源。
 
-        [下载 PDF](/uploads/papers/smo-2021-review.pdf) · [DOI: 10.1007/s00158-021-03050-7](https://doi.org/10.1007/s00158-021-03050-7) · [完整收录信息](/zh-cn/publications/smo-2021-review/)
+        [下载 PDF](/uploads/papers/smo-2021-review.pdf) · [DOI: 10.1007/s00158-021-03050-7](https://doi.org/10.1007/s00158-021-03050-7) · [完整收录信息](/publications/smo-2021-review/)
 ---

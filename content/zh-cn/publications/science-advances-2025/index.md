@@ -42,4 +42,4 @@ featured: true
 
 **DOI：** [10.1126/sciadv.adr6925](https://doi.org/10.1126/sciadv.adr6925)
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

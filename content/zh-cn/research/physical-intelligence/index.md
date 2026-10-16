@@ -19,7 +19,7 @@ authors:
 ---
 物理智能的核心思想是：系统的一部分“计算”可以由结构本身承担——通过本体变形、适应与响应，降低控制系统所需承担的负担。我们研究当结构是被**设计**出来而非被选定时，这一思想能够走多远。
 
-本方向是前两个方向的交汇点：它使用拓扑优化的计算框架、[构筑材料与力学超材料](/zh-cn/research/architected-materials/)的设计空间，以及[多功能材料与结构](/zh-cn/research/multifunctional-materials/)的耦合物理，并检验所得行为能否在真实器件中发挥作用。
+本方向是前两个方向的交汇点：它使用拓扑优化的计算框架、[构筑材料与力学超材料](/research/architected-materials/)的设计空间，以及[多功能材料与结构](/research/multifunctional-materials/)的耦合物理，并检验所得行为能否在真实器件中发挥作用。
 
 应用研究是我们整体研究布局的一部分，课题组定位以力学与计算设计为中心，先进工程结构与柔性电子等方向并行推进。
 
@@ -37,4 +37,4 @@ authors:
 - **Direct ink writing of magnetic soft materials with optimized printing path**，*Additive Manufacturing*，105, 104770（2025）。
 - 美国发明专利申请 “Systems and Methods for Wireless Magnetic Mechanotherapy” 共同发明人。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

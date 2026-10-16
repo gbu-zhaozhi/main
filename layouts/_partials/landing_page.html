@@ -9,7 +9,7 @@
 */}}
 {{/* Use unified sections source */}}
 {{- $sections := partial "hbx/sections.html" . -}}
-{{- $show_dividers := or $.IsHome (eq $.Section "research") -}}
+{{- $show_dividers := or $.IsHome (eq $.Section "research") (eq $.Section "contact") -}}
 
 {{ range $index, $block := $sections }}
   {{/* Do not show sections intended only for the demo site. */}}

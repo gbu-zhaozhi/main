@@ -36,4 +36,4 @@ featured: false
 
 发表于 **Computer Methods in Applied Mechanics and Engineering**（卷 413，页码 116065），2023 年。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

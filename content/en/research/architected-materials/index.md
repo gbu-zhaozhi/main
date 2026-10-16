@@ -36,4 +36,4 @@ Two design concepts recur in our work. **Layered architectures** let a structure
 - **Tuning buckling behaviors in magnetically active structures: topology optimization and experimental validation** — *Journal of Applied Mechanics*, 90(9), 091006 (2023).
 - **Additive manufacturing of topology-optimized graded porous structures: an experimental study** — *JOM*, 73, 2022–2030 (2021).
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

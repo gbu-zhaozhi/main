@@ -42,4 +42,4 @@ Published in **Science Advances** (volume 11, issue 20, pages eadr6925), 2025.
 
 **DOI:** [10.1126/sciadv.adr6925](https://doi.org/10.1126/sciadv.adr6925)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

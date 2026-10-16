@@ -27,19 +27,19 @@ sections:
 
         ### Postdoctoral Researchers
 
-        *Openings available.* See [Openings](/openings/) for details.
+        *Openings available.* See [Openings](/en/openings/) for details.
 
         ### Ph.D. Students
 
-        *Openings available.* See [Openings](/openings/) for details.
+        *Openings available.* See [Openings](/en/openings/) for details.
 
         ### Master’s Students
 
-        *Openings available.* See [Openings](/openings/) for details.
+        *Openings available.* See [Openings](/en/openings/) for details.
 
         ### Undergraduate Researchers
 
-        *Openings available.* See [Openings](/openings/) for details.
+        *Openings available.* See [Openings](/en/openings/) for details.
 
         ### Visitors and Collaborators
 

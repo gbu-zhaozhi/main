@@ -46,4 +46,4 @@ Published in **Advanced Science** (volume 11, issue 35, pages 2308619), 2024.
 
 **DOI:** [10.1002/advs.202308619](https://doi.org/10.1002/advs.202308619)
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

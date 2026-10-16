@@ -35,4 +35,4 @@ authors:
 - **Multiphysics topology optimization of magnetic materials with continuous magnetization orientations**，*Mechanics of Materials*，198, 105089（2024）。
 - **Encoding reprogrammable properties into magneto-mechanical materials via topology optimization**，*npj Computational Materials*，9(57), 1–11（2023）。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

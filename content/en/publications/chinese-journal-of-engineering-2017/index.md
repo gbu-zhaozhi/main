@@ -38,4 +38,4 @@ featured: false
 
 Published in **Chinese Journal of Engineering** (volume 39, issue 10, pages 1598–1605), 2017. In Chinese.
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

@@ -15,11 +15,11 @@ sections:
       text: '**智能材料与结构的设计优化。** 我们发展面向力学及多物理场问题的逆向设计框架，将理论计算、增材制造制备与实验表征紧密结合。'
       primary_action:
         text: '了解研究方向'
-        url: '/zh-cn/research/'
+        url: '/research/'
         style: 'solid'
       secondary_action:
         text: '加入课题组'
-        url: '/zh-cn/openings/'
+        url: '/openings/'
         style: 'outline'
       media:
         type: 'image'
@@ -43,6 +43,17 @@ sections:
 
         我们的科学定位以**力学与计算设计**为根基，并延伸至先进材料、耦合多物理场与物理智能结构。
 
+        <p class="hb-sp-intro">也欢迎在社交媒体上找到我们——扫码关注课题组的<strong>小红书</strong>与<strong>抖音</strong>账号，或通过谷歌学术、邮箱与 ResearchGate 与我们取得联系。</p>
+        <div class="hb-sp-links">
+          <a class="hb-sp-link" href="https://scholar.google.com/citations?user=97AQtN4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></span><span class="hb-sp-label">谷歌学术</span></a>
+          <a class="hb-sp-link" href="mailto:zhaoz@gbu.edu.cn"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span class="hb-sp-label">邮箱</span></a>
+          <a class="hb-sp-link" href="https://www.researchgate.net/profile/Zhi-Zhao-10" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><text x="12" y="17" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Georgia,serif" fill="currentColor">RG</text></svg></span><span class="hb-sp-label">ResearchGate</span></a>
+        </div>
+        <div class="hb-sp-qrs">
+          <figure class="hb-sp-qr"><img src="/uploads/qr-xiaohongshu.png" alt="小红书二维码" loading="lazy"><figcaption>小红书</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="/uploads/qr-douyin.png" alt="抖音二维码" loading="lazy"><figcaption>抖音</figcaption></figure>
+        </div>
+
   - block: focus-areas
     id: research
     content:
@@ -53,7 +64,7 @@ sections:
         - name: '构筑材料与力学超材料'
           description: '设计具有可编程非线性响应、多稳态、屈曲与可调力学性能的材料与结构。'
           image: 'research/area-b.jpg'
-          url: '/zh-cn/research/architected-materials/'
+          url: '/research/architected-materials/'
           cta_text: '了解更多'
           topics:
             - 力学超材料
@@ -63,7 +74,7 @@ sections:
         - name: '多功能材料与结构'
           description: '研究磁-力耦合与磁-电-力耦合、可编程驱动、传感与多功能力学系统。'
           image: 'research/area-c.jpg'
-          url: '/zh-cn/research/multifunctional-materials/'
+          url: '/research/multifunctional-materials/'
           cta_text: '了解更多'
           topics:
             - 磁-力耦合
@@ -73,7 +84,7 @@ sections:
         - name: '物理智能与先进应用'
           description: '探索融合力学适应性、驱动与传感的智能结构、软体机器人系统与生物医疗器件。'
           image: 'research/area-d.jpg'
-          url: '/zh-cn/research/physical-intelligence/'
+          url: '/research/physical-intelligence/'
           cta_text: '了解更多'
           topics:
             - 智能结构
@@ -86,7 +97,7 @@ sections:
     id: publications
     content:
       title: '代表性论文'
-      text: '课题组精选论文。完整列表请见[论文发表](/zh-cn/publications/)页面。'
+      text: '课题组精选论文。完整列表请见[论文发表](/publications/)页面。'
       count: 4
       filters:
         folders:
@@ -102,14 +113,14 @@ sections:
     content:
       title: '团队成员'
       subtitle: '课题负责人'
-      text: 'Zhao Lab 由助理教授、研究员赵志领衔。随着课题组发展，将陆续吸纳博士后、博士研究生、硕士研究生与本科生科研助理——详见[招生招聘](/zh-cn/openings/)。'
+      text: 'Zhao Lab 由助理教授、研究员赵志领衔。随着课题组发展，将陆续吸纳博士后、博士研究生、硕士研究生与本科生科研助理——详见[招生招聘](/openings/)。'
       user_groups:
         - name: 'Principal Investigator'
       sort_by: 'weight'
       sort_ascending: true
       cta:
         text: '查看团队成员'
-        url: '/zh-cn/people/'
+        url: '/people/'
     design:
       max_columns: 3
 
@@ -124,5 +135,5 @@ sections:
 
         欢迎热爱科研、有扎实力学及编程基础、动手能力强的同学邮件联系：**zhaoz@gbu.edu.cn**。
 
-        [查看完整招生信息 →](/zh-cn/openings/)
+        [查看完整招生信息 →](/openings/)
 ---

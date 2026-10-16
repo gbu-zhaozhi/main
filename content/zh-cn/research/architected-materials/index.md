@@ -36,4 +36,4 @@ authors:
 - **Tuning buckling behaviors in magnetically active structures: topology optimization and experimental validation**，*Journal of Applied Mechanics*，90(9), 091006（2023）。
 - **Additive manufacturing of topology-optimized graded porous structures: an experimental study**，*JOM*，73, 2022–2030（2021）。
 
-完整列表请见[论文发表](/zh-cn/publications/)页面。
+完整列表请见[论文发表](/publications/)页面。

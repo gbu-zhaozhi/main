@@ -35,4 +35,4 @@ Our focus is on making these coupled responses **designable**. Rather than accep
 - **Multiphysics topology optimization of magnetic materials with continuous magnetization orientations** — *Mechanics of Materials*, 198, 105089 (2024).
 - **Encoding reprogrammable properties into magneto-mechanical materials via topology optimization** — *npj Computational Materials*, 9(57), 1–11 (2023).
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

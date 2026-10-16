@@ -19,7 +19,7 @@ authors:
 ---
 Physical intelligence is the idea that part of a system’s “computation” can be carried by its structure: a body that deforms, adapts, and responds in ways that reduce what its controller must do. We study how far this idea can be pushed when the structure is designed rather than chosen.
 
-This direction is where the other two meet. It uses the computational frameworks of topology optimization, the design space of [architected materials](/research/architected-materials/), and the coupled physics of [multifunctional materials](/research/multifunctional-materials/), and asks whether the resulting behaviour is useful in a real device.
+This direction is where the other two meet. It uses the computational frameworks of topology optimization, the design space of [architected materials](/en/research/architected-materials/), and the coupled physics of [multifunctional materials](/en/research/multifunctional-materials/), and asks whether the resulting behaviour is useful in a real device.
 
 Applications are treated as one part of a broader research programme centred on mechanics and computational design, alongside advanced engineering structures and flexible electronics.
 
@@ -37,4 +37,4 @@ Applications are treated as one part of a broader research programme centred on 
 - **Direct ink writing of magnetic soft materials with optimized printing path** — *Additive Manufacturing*, 105, 104770 (2025).
 - Co-inventor on a U.S. patent application, “Systems and Methods for Wireless Magnetic Mechanotherapy.”
 
-See the [Publications](/publications/) page for the complete list.
+See the [Publications](/en/publications/) page for the complete list.

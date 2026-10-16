@@ -48,7 +48,7 @@ sections:
     id: selected-publications
     content:
       title: 代表性论著
-      text: '精选论文。完整列表请见[论文发表](/zh-cn/publications/)页面。'
+      text: '精选论文。完整列表请见[论文发表](/publications/)页面。'
       count: 6
       filters:
         folders:
