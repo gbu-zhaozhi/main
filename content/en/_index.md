@@ -49,8 +49,8 @@ sections:
           <a class="hb-sp-link" href="https://www.researchgate.net/profile/Zhi-Zhao-10" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><text x="12" y="17" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Georgia,serif" fill="currentColor">RG</text></svg></span><span class="hb-sp-label">ResearchGate</span></a>
         </div>
         <div class="hb-sp-qrs">
-          <figure class="hb-sp-qr"><img src="/uploads/qr-xiaohongshu.png" alt="Xiaohongshu (RED) QR code" loading="lazy"><figcaption>RED</figcaption></figure>
-          <figure class="hb-sp-qr"><img src="/uploads/qr-douyin.png" alt="Douyin QR code" loading="lazy"><figcaption>Douyin</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="/main/uploads/qr-xiaohongshu.png" alt="Xiaohongshu (RED) QR code" loading="lazy"><figcaption>RED</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="/main/uploads/qr-douyin.png" alt="Douyin QR code" loading="lazy"><figcaption>Douyin</figcaption></figure>
         </div>
 
   - block: focus-areas
