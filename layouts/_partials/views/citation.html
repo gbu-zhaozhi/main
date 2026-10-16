@@ -11,7 +11,7 @@
 {{ $pdf_url := "" }}
 {{ range $item.Params.links }}
   {{ if and (not $pdf_url) (eq (printf "%v" .type) "pdf") }}
-    {{ with .url }}{{ $pdf_url = printf "%v" . }}{{ end }}
+    {{ with .url }}{{ $pdf_url = printf "%v" . }}{{ if and (strings.HasPrefix $pdf_url "/") (not (strings.HasPrefix $pdf_url "//")) }}{{ $pdf_url = printf "%s%s" (strings.TrimRight "/" ((urls.Parse site.BaseURL).Path)) $pdf_url }}{{ end }}{{ end }}
   {{ end }}
 {{ end }}
 {{ $title_href := $item.RelPermalink }}

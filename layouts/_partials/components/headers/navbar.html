@@ -112,7 +112,25 @@
             {{- end }}
             {{- $url = .URL -}}
           {{- else -}}
-            {{- $url = .URL | relLangURL -}}
+            {{- $url = .URL -}}
+            {{- /* Zhao Lab: subpath-safe menu URLs. Hugo emits root-absolute
+                 menu URLs ("/main/research/") that relLangURL leaves
+                 unchanged; strip the baseURL path, then re-add it. "/" maps
+                 straight to the home RelPermalink (relLangURL("/") is
+                 unreliable on 404 pages). */ -}}
+            {{- $root := strings.TrimRight "/" ((urls.Parse site.BaseURL).Path) -}}
+            {{- if and (strings.HasPrefix $url "/") (not (strings.HasPrefix $url "//")) }}
+              {{- /* Hugo 0.168 strings.TrimPrefix takes (PREFIX, STRING) */ -}}
+              {{- $url = strings.TrimPrefix $root $url -}}
+              {{- if not $url }}{{- $url = "/" -}}{{- end -}}
+              {{- if eq $url "/" -}}
+                {{- $url = site.Home.RelPermalink -}}
+              {{- else -}}
+                {{- $url = printf "%s%s" $root ($url | relLangURL) -}}
+              {{- end -}}
+            {{- else -}}
+              {{- $url = $url | relLangURL -}}
+            {{- end -}}
           {{- end -}}
           <li class="nav-dropdown-item">
             <a
@@ -135,7 +153,21 @@
         {{- end }}
         {{- $url = .URL -}}
         {{- else -}}
-        {{- $url = .URL | relLangURL -}}
+        {{- $url = .URL -}}
+        {{- /* Zhao Lab: subpath-safe menu URLs (see the comment above). */ -}}
+        {{- $root := strings.TrimRight "/" ((urls.Parse site.BaseURL).Path) -}}
+        {{- if and (strings.HasPrefix $url "/") (not (strings.HasPrefix $url "//")) }}
+          {{- /* Hugo 0.168 strings.TrimPrefix takes (PREFIX, STRING) */ -}}
+              {{- $url = strings.TrimPrefix $root $url -}}
+          {{- if not $url }}{{- $url = "/" -}}{{- end -}}
+          {{- if eq $url "/" -}}
+            {{- $url = site.Home.RelPermalink -}}
+          {{- else -}}
+            {{- $url = printf "%s%s" $root ($url | relLangURL) -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $url = $url | relLangURL -}}
+        {{- end -}}
       {{- end -}}
       <li class="nav-item">
         <a
