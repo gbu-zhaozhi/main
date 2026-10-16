@@ -48,9 +48,14 @@ sections:
           <a class="hb-sp-link" href="mailto:zhaoz@gbu.edu.cn"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span class="hb-sp-label">E-mail</span></a>
           <a class="hb-sp-link" href="https://www.researchgate.net/profile/Zhi-Zhao-10" target="_blank" rel="noopener noreferrer"><span class="hb-sp-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><text x="12" y="17" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Georgia,serif" fill="currentColor">RG</text></svg></span><span class="hb-sp-label">ResearchGate</span></a>
         </div>
+        <!-- QR images use a path relative to the page URL: the site is
+             deployed under the GitHub Pages subpath /main/, where absolute
+             /uploads/... would 404. The EN homepage lives at /main/en/, so
+             "../uploads/..." resolves to /main/uploads/...; it resolves to
+             /uploads/... under a root-level baseURL too (local preview). -->
         <div class="hb-sp-qrs">
-          <figure class="hb-sp-qr"><img src="/main/uploads/qr-xiaohongshu.png" alt="Xiaohongshu (RED) QR code" loading="lazy"><figcaption>RED</figcaption></figure>
-          <figure class="hb-sp-qr"><img src="/main/uploads/qr-douyin.png" alt="Douyin QR code" loading="lazy"><figcaption>Douyin</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="../uploads/qr-xiaohongshu.png" alt="Xiaohongshu (RED) QR code" loading="lazy"><figcaption>RED</figcaption></figure>
+          <figure class="hb-sp-qr"><img src="../uploads/qr-douyin.png" alt="Douyin QR code" loading="lazy"><figcaption>Douyin</figcaption></figure>
         </div>
 
   - block: focus-areas

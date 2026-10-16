@@ -10,6 +10,12 @@
 {{ $design := $block.design }}
 {{ if not (reflect.IsMap $design) }}{{ $design = dict }}{{ end }}
 
+{{/* Zhao Lab: subpath-safe internal URLs.
+     Hugo's relLangURL leaves root-absolute URLs ("/research/...") unchanged;
+     the site is served under /main/ on GitHub Pages, so prepend the home
+     RelPermalink (which carries the subpath). */}}
+{{ $home := strings.TrimRight "/" ((urls.Parse site.BaseURL).Path) }}
+
 {{ $layout := "cards" }}
 {{ $layout_raw := index $design "layout" }}
 {{ if eq (printf "%T" $layout_raw) "string" }}
@@ -265,7 +271,7 @@
             {{ $item_cta_scheme := (urls.Parse $item_cta_link).Scheme }}
             {{ if not $item_cta_scheme }}
               {{ if not (hasPrefix $item_cta_link "#") }}
-                {{ $item_cta_link = $item_cta_link | relLangURL }}
+                {{ if hasPrefix $item_cta_link "/" }}{{ $item_cta_link = printf "%s%s" $home $item_cta_link }}{{ else }}{{ $item_cta_link = $item_cta_link | relLangURL }}{{ end }}
               {{ end }}
             {{ else if in (slice "http" "https") $item_cta_scheme }}
               {{ $item_cta_target = "target=\"_blank\" rel=\"noopener\"" }}
@@ -307,7 +313,7 @@
                 {{ $item_scheme := (urls.Parse $item_link).Scheme }}
                 {{ if not $item_scheme }}
                   {{ if not (hasPrefix $item_link "#") }}
-                    {{ $item_link = $item_link | relLangURL }}
+                    {{ if hasPrefix $item_link "/" }}{{ $item_link = printf "%s%s" $home $item_link }}{{ else }}{{ $item_link = $item_link | relLangURL }}{{ end }}
                   {{ end }}
                 {{ else if in (slice "http" "https") $item_scheme }}
                   {{ $item_target = "target=\"_blank\" rel=\"noopener\"" }}
@@ -436,7 +442,7 @@
     {{ $cta_scheme := (urls.Parse $cta_link).Scheme }}
     {{ if not $cta_scheme }}
       {{ if not (hasPrefix $cta_link "#") }}
-        {{ $cta_link = $cta_link | relLangURL }}
+        {{ if hasPrefix $cta_link "/" }}{{ $cta_link = printf "%s%s" $home $cta_link }}{{ else }}{{ $cta_link = $cta_link | relLangURL }}{{ end }}
       {{ end }}
     {{ else if in (slice "http" "https") $cta_scheme }}
       {{ $cta_target = "target=\"_blank\" rel=\"noopener\"" }}

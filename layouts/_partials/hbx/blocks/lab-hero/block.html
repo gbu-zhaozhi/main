@@ -74,11 +74,19 @@
 {{ with index $content "secondary_action" }}{{ if reflect.IsMap . }}{{ $sa = . }}{{ end }}{{ end }}
 
 {{ $pa_text := "" }}{{ with index $pa "text" }}{{ $pa_text = printf "%v" . }}{{ end }}
-{{ $pa_url := "" }}{{ with index $pa "url" }}{{ $pa_url = printf "%v" . }}{{ end }}
-{{ $pa_style := "solid" }}{{ with index $pa "style" }}{{ $pa_style = printf "%v" . }}{{ end }}
+{{ $pa_url := "" }}{{ with index $pa "url" }}{{ $pa_url = printf "%v" . }}{{ end }}{{ $pa_style := "solid" }}{{ with index $pa "style" }}{{ $pa_style = printf "%v" . }}{{ end }}
 {{ $sa_text := "" }}{{ with index $sa "text" }}{{ $sa_text = printf "%v" . }}{{ end }}
 {{ $sa_url := "" }}{{ with index $sa "url" }}{{ $sa_url = printf "%v" . }}{{ end }}
 {{ $sa_style := "outline" }}{{ with index $sa "style" }}{{ $sa_style = printf "%v" . }}{{ end }}
+
+{{/* ---------- subpath-safe action URLs ----------
+     The site is served under a baseURL subpath (/main/ on GitHub Pages).
+     Hugo's relLangURL leaves root-absolute URLs ("/research/") unchanged,
+     which 404s under the subpath. Prepend the home RelPermalink (carries
+     the subpath; "/" on a root-level baseURL, making this a no-op). */}}
+{{ $home := strings.TrimRight "/" ((urls.Parse site.BaseURL).Path) }}
+{{ $pa_href := $pa_url }}{{ if and $pa_url (strings.HasPrefix $pa_url "/") (not (strings.HasPrefix $pa_url "//")) }}{{ $pa_href = printf "%s%s" $home $pa_url }}{{ else if $pa_url }}{{ $pa_href = $pa_url | relLangURL }}{{ end }}
+{{ $sa_href := $sa_url }}{{ if and $sa_url (strings.HasPrefix $sa_url "/") (not (strings.HasPrefix $sa_url "//")) }}{{ $sa_href = printf "%s%s" $home $sa_url }}{{ else if $sa_url }}{{ $sa_href = $sa_url | relLangURL }}{{ end }}
 
 {{/* ---------- media ---------- */}}
 {{ $img_src := "" }}
@@ -178,10 +186,10 @@
     {{ if or $pa_url $sa_url }}
     <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
       {{ if and $pa_url $pa_text }}
-      <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $banner_outline }}{{ else }}{{ $banner_solid }}{{ end }}">{{ $pa_text }}</a>
+      <a href="{{ $pa_href }}" class="{{ if eq $pa_style "outline" }}{{ $banner_outline }}{{ else }}{{ $banner_solid }}{{ end }}">{{ $pa_text }}</a>
       {{ end }}
       {{ if and $sa_url $sa_text }}
-      <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $banner_solid }}{{ else }}{{ $banner_outline }}{{ end }}">{{ $sa_text }}</a>
+      <a href="{{ $sa_href }}" class="{{ if eq $sa_style "solid" }}{{ $banner_solid }}{{ else }}{{ $banner_outline }}{{ end }}">{{ $sa_text }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -255,10 +263,10 @@
         {{ if or $pa_url $sa_url }}
         <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
           {{ if and $pa_url $pa_text }}
-          <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
+          <a href="{{ $pa_href }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
           {{ end }}
           {{ if and $sa_url $sa_text }}
-          <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
+          <a href="{{ $sa_href }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
           {{ end }}
         </div>
         {{ end }}
@@ -286,10 +294,10 @@
       {{ if or $pa_url $sa_url }}
       <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
         {{ if and $pa_url $pa_text }}
-        <a href="{{ $pa_url | relLangURL }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
+        <a href="{{ $pa_href }}" class="{{ if eq $pa_style "outline" }}{{ $outlineCls }}{{ else }}{{ $solidCls }}{{ end }}">{{ $pa_text }}</a>
         {{ end }}
         {{ if and $sa_url $sa_text }}
-        <a href="{{ $sa_url | relLangURL }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
+        <a href="{{ $sa_href }}" class="{{ if eq $sa_style "solid" }}{{ $solidCls }}{{ else }}{{ $outlineCls }}{{ end }}">{{ $sa_text }}</a>
         {{ end }}
       </div>
       {{ end }}

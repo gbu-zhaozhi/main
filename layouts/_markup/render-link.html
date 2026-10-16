@@ -1,0 +1,17 @@
+{{- /* Zhao Lab override of the Hugo Blox link render hook.
+
+  The site is deployed to GitHub Pages under a subpath
+  (https://gbu-zhaozhi.github.io/main/). Hugo emits root-absolute markdown
+  link destinations (e.g. `/research/`) verbatim, which then 404 under the
+  subpath. Rewrite any internal root-absolute destination against the site
+  home's RelPermalink (which carries the baseURL subpath, e.g. `/main/`).
+  External http(s), mailto: and #anchor destinations pass through.
+
+  With a root-level baseURL (local preview of the dev copy) the home
+  RelPermalink is "/", so the rewrite is a no-op there. */ -}}
+{{- $dest := .Destination -}}
+{{- $external := or (strings.HasPrefix $dest "http") (strings.HasPrefix $dest "mailto:") (strings.HasPrefix $dest "#") -}}
+{{- if and (not $external) (strings.HasPrefix $dest "/") -}}
+  {{- $dest = printf "%s%s" (strings.TrimRight "/" ((urls.Parse site.BaseURL).Path)) $dest -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix $dest "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
