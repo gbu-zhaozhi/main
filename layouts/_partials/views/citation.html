@@ -25,7 +25,8 @@
 
   {{ with $thumb }}
   <a class="hb-pub-thumb" href="{{ $title_href }}"{{ if $title_is_pdf }} target="_blank" rel="noopener" download{{ end }}>
-    {{ if reflect.IsImageResourceProcessable . }}
+    {{/* GIF: skip processing to preserve animation frames */}}
+    {{ if and (reflect.IsImageResourceProcessable .) (ne .MediaType.SubType "gif") }}
       {{ $t := .Fit "360x300" }}
       <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="{{ $item.Title }}" loading="lazy" decoding="async">
     {{ else }}
