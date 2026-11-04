@@ -1,0 +1,78 @@
+{{ $item := .item }}
+{{ $year_value := $item.Params.event_start | default $item.Date }}
+{{ $year := (time $year_value).Format "2006" }}
+{{ $has_attachments := partial "functions/has_attachments" $item }}
+{{ $pub := partial "functions/resolve_publication.html" $item }}
+{{ $top_award := "" }}
+{{ with $item.Params.awards }}{{ $top_award = index . 0 }}{{ end }}
+
+{{/* Zhao Lab: if the entry carries a full-text PDF (`links: - type: pdf`),
+     the title (and thumbnail) open the PDF directly instead of the detail page. */}}
+{{ $pdf_url := "" }}
+{{ range $item.Params.links }}
+  {{ if and (not $pdf_url) (eq (printf "%v" .type) "pdf") }}
+    {{ with .url }}{{ $pdf_url = printf "%v" . }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ $title_href := $item.RelPermalink }}
+{{ $title_is_pdf := false }}
+{{ with $pdf_url }}{{ $title_href = . }}{{ $title_is_pdf = true }}{{ end }}
+
+{{/* Zhao Lab: paper figure as a small thumbnail on the left. */}}
+{{ $thumb := partial "functions/get_featured_image.html" $item }}
+
+<div class="pub-list-item view-citation hb-pub-item" style="margin-bottom: 1.5rem">
+
+  {{ with $thumb }}
+  <a class="hb-pub-thumb" href="{{ $title_href }}"{{ if $title_is_pdf }} target="_blank" rel="noopener" download{{ end }}>
+    {{ if reflect.IsImageResourceProcessable . }}
+      {{ $t := .Fit "360x300" }}
+      <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="{{ $item.Title }}" loading="lazy" decoding="async">
+    {{ else }}
+      <img src="{{ .RelPermalink }}" alt="{{ $item.Title }}" loading="lazy" decoding="async">
+    {{ end }}
+  </a>
+  {{ end }}
+
+  <div class="hb-pub-text">
+    {{/* APA Style */}}
+    {{ if eq (site.Params.hugoblox.content.citations.style | default "apa") "apa" }}
+
+    <span class="article-metadata li-cite-author">
+      {{ partial "page_metadata_authors" $item }}
+    </span>
+    ({{- $year -}}).
+    <a href="{{ $title_href }}" class="underline"{{ if $title_is_pdf }} target="_blank" rel="noopener" download{{ end }}>{{ $item.Title }}</a>.
+    {{ with $pub.display_short }}{{- . | markdownify -}}.{{ end }}
+    {{ with $top_award }}
+      <span class="ml-1">{{ partial "components/award_badge.html" (dict "award" . "page" $item "variant" "inline") }}</span>
+    {{ end }}
+
+    {{ if $has_attachments }}
+    <div class="flex flex-wrap space-x-3">
+      {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+    </div>
+    {{ end }}
+
+    {{/* MLA Style */}}
+    {{ else }}
+
+    <span class="article-metadata li-cite-author">
+      {{ partial "page_metadata_authors" $item }}.
+    </span>
+    <a href="{{ $title_href }}"{{ if $title_is_pdf }} target="_blank" rel="noopener" download{{ end }}>{{ $item.Title }}</a>.
+    {{ with $pub.display_short }}{{- . | markdownify -}},{{ end }}
+    {{- $year -}}.
+    {{ with $top_award }}
+      <span class="ml-1">{{ partial "components/award_badge.html" (dict "award" . "page" $item "variant" "inline") }}</span>
+    {{ end }}
+
+    {{ if $has_attachments }}
+    <div class="flex flex-wrap space-x-3">
+      {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+    </div>
+    {{ end }}
+
+    {{ end }}
+  </div>
+</div>

@@ -1,0 +1,233 @@
+{{/*
+  Zhao Lab: campus map block (`amap`).
+
+  Renders the lab's campus location with AMap (高德地图, GCJ-02 coordinates).
+
+  Compliance note: no map API key is shipped with this repository. The key is
+  read from `params.yaml` (top-level `map:` section) and defaults to a
+  placeholder. Until a real key is configured the block degrades gracefully:
+  it renders the campus name, the full postal address and an "Open in AMap"
+  link, so the page is never blank and never broken.
+
+  Content params (per language, in the page front matter):
+    title       Section heading
+    text        Intro paragraph (markdown)
+    name        Marker / POI label
+    address     Postal address shown under the map
+    link_text   Text for the "view on AMap" link
+    height      Map height in px (default 380)
+
+  Site params (config/_default/params.yaml, top-level `map:`):
+    amap_key            AMap Web JS API key (placeholder until you apply)
+    amap_security_code  AMap "安全密钥" (required for keys created after 2021-12-02)
+    lng / lat           GCJ-02 coordinates
+    zoom                Initial zoom level
+*/}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+
+{{/* ---------- localised strings (from the page front matter) ---------- */}}
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $text := "" }}
+{{ with index $content "text" }}{{ $text = $page.RenderString (printf "%v" .) }}{{ end }}
+
+{{ $name := "" }}
+{{ with index $content "name" }}{{ $name = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $address := "" }}
+{{ with index $content "address" }}{{ $address = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $link_text := "" }}
+{{ with index $content "link_text" }}{{ $link_text = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $link_text }}{{ $link_text = "Open in AMap" }}{{ end }}
+
+{{ $height := 380 }}
+{{ with index $content "height" }}{{ $height = int . }}{{ end }}
+
+{{/* ---------- site-level map settings ---------- */}}
+{{ $m := dict }}
+{{ with site.Params.map }}{{ if reflect.IsMap . }}{{ $m = . }}{{ end }}{{ end }}
+
+{{ $key := "" }}
+{{ with index $m "amap_key" }}{{ $key = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $sec := "" }}
+{{ with index $m "amap_security_code" }}{{ $sec = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $lng := "" }}
+{{ with index $m "lng" }}{{ $lng = printf "%v" . }}{{ end }}
+{{ $lat := "" }}
+{{ with index $m "lat" }}{{ $lat = printf "%v" . }}{{ end }}
+{{ $zoom := "15" }}
+{{ with index $m "zoom" }}{{ $zoom = printf "%v" . }}{{ end }}
+
+{{/* A configured key is one that is neither empty nor still the placeholder. */}}
+{{ $key_ok := false }}
+{{ if $key }}
+  {{ $kl := lower $key }}
+  {{ if and (not (strings.Contains $kl "please apply")) (not (strings.Contains $kl "your key")) (not (strings.Contains $kl "placeholder")) (not (strings.Contains $kl "xxx")) }}
+    {{ $key_ok = true }}
+  {{ end }}
+{{ end }}
+
+{{ $sec_ok := false }}
+{{ if $sec }}
+  {{ $sl := lower $sec }}
+  {{ if and (not (strings.Contains $sl "please apply")) (not (strings.Contains $sl "your key")) (not (strings.Contains $sl "placeholder")) }}
+    {{ $sec_ok = true }}
+  {{ end }}
+{{ end }}
+
+{{/* ---------- link to the AMap web app (works without any key) ---------- */}}
+{{ $amap_url := "" }}
+{{ if and $lng $lat }}
+  {{ $amap_url = printf "https://uri.amap.com/marker?position=%s,%s&name=%s&coordinate=gaode&callnative=0" $lng $lat ($name | urlquery) }}
+{{ end }}
+
+{{/* ---------- stable DOM id ---------- */}}
+{{ $uid := printf "hb-amap-%s" (anchorize (printf "%s-%s" $page.RelPermalink (index $content "id" | default (index $block "id" | default "campus")))) }}
+
+<div class="py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+    {{ with $title }}
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">{{ . }}</h2>
+    {{ end }}
+
+    {{ with $text }}
+    <div class="mt-4 prose prose-lg max-w-none text-gray-600 dark:text-gray-300">{{ . | safeHTML }}</div>
+    {{ end }}
+
+    <div class="hb-amap mt-8">
+
+      {{ if $key_ok }}
+      <div id="{{ $uid }}"
+           class="hb-amap-canvas"
+           style="height: {{ $height }}px;"
+           data-lng="{{ $lng }}"
+           data-lat="{{ $lat }}"
+           data-zoom="{{ $zoom }}"
+           data-name="{{ $name }}"
+           data-address="{{ $address }}"></div>
+      {{ else }}
+      <!--
+        AMap (高德地图) needs a Web JS API key that belongs to you. This block is
+        currently rendering its no-key fallback (campus photo, click-through to
+        AMap, plus address card) because `map.amap_key` in config/_default/params.yaml is still the
+        placeholder.
+
+        To enable the interactive map:
+          1. Apply for a free key at https://console.amap.com/dev/key/app (Service:
+             Web端(JS API)); if the key was issued after 2021-12-02 also copy the
+             "安全密钥" (security code).
+          2. Put them into config/_default/params.yaml:
+               map:
+                 amap_key: "<your key>"
+                 amap_security_code: "<your security code>"
+          3. Rebuild. Front-end keys are public by nature: set a Referer/domain
+             whitelist in the AMap console to stop other sites from using it.
+      -->
+      {{ $campus := resources.Get "media/gbu-campus.jpg" }}
+      {{ if $campus }}
+      <div class="hb-amap-photo">
+        {{ with $amap_url }}<a class="hb-amap-photo-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ end }}
+          <img src="{{ $campus.RelPermalink }}" width="{{ $campus.Width }}" height="{{ $campus.Height }}"
+               alt="{{ $name | default $address | default "Campus" }}" loading="lazy" decoding="async">
+        {{ with $amap_url }}</a>{{ end }}
+      </div>
+      {{ else }}
+      <div class="hb-amap-fallback" style="height: {{ $height }}px;">
+        <svg class="hb-amap-pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>
+        </svg>
+      </div>
+      {{ end }}
+      {{ end }}
+
+      <div class="hb-amap-meta">
+        {{ with $name }}<p class="hb-amap-name">{{ . }}</p>{{ end }}
+        {{ with $address }}<p class="hb-amap-address">{{ . }}</p>{{ end }}
+        {{ with $amap_url }}
+        <p class="hb-amap-actions">
+          <a class="hb-amap-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $link_text }}</a>
+        </p>
+        {{ end }}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{{ if $key_ok }}
+{{ if $sec_ok }}
+<script>
+  /* AMap JSAPI 2.0: the security code must be set before the SDK is loaded. */
+  window._AMapSecurityConfig = { securityJsCode: {{ $sec | jsonify }} };
+</script>
+{{ end }}
+<script>
+(function () {
+  var el = document.getElementById({{ $uid | jsonify }});
+  if (!el) return;
+  var KEY = {{ $key | jsonify }};
+  var lng = parseFloat(el.dataset.lng);
+  var lat = parseFloat(el.dataset.lat);
+  var zoom = parseFloat(el.dataset.zoom) || 15;
+  var name = el.dataset.name || "";
+  var address = el.dataset.address || "";
+
+  function fail() { el.classList.add("hb-amap-unavailable"); }
+
+  function init() {
+    if (!window.AMap) { fail(); return; }
+    var map = new AMap.Map(el, { zoom: zoom, center: [lng, lat], viewMode: "2D" });
+    var marker = new AMap.Marker({ position: [lng, lat], title: name, anchor: "bottom-center" });
+    map.add(marker);
+
+    var box = document.createElement("div");
+    box.className = "hb-amap-infowin";
+    if (name) {
+      var t = document.createElement("div");
+      t.className = "hb-amap-infowin-title";
+      t.textContent = name;
+      box.appendChild(t);
+    }
+    if (address) {
+      var a = document.createElement("div");
+      a.className = "hb-amap-infowin-addr";
+      a.textContent = address;
+      box.appendChild(a);
+    }
+    var iw = new AMap.InfoWindow({ content: box, offset: new AMap.Pixel(0, -36), anchor: "bottom-center" });
+    iw.open(map, [lng, lat]);
+    marker.on("click", function () { iw.open(map, [lng, lat]); });
+  }
+
+  function load() {
+    var s = document.createElement("script");
+    s.src = "https://webapi.amap.com/maps?v=2.0&key=" + encodeURIComponent(KEY);
+    s.async = true;
+    s.onload = function () { window.AMap ? init() : fail(); };
+    s.onerror = fail;
+    document.head.appendChild(s);
+  }
+
+  /* Load only when the visitor scrolls to the map, so the key's daily quota is
+     not consumed by page views that never reach this section. */
+  if (window.IntersectionObserver) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries && entries[0] && entries[0].isIntersecting) { io.disconnect(); load(); }
+    }, { rootMargin: "200px" });
+    io.observe(el);
+  } else {
+    load();
+  }
+})();
+</script>
+{{ end }}

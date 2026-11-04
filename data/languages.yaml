@@ -1,0 +1,5 @@
+# Display names used by the language switcher.
+# Overrides the names shipped by the HugoBlox theme ('English', '简体中文')
+# so the header shows the compact "中文 | EN" form.
+'en': 'EN'
+'zh-cn': '中文'

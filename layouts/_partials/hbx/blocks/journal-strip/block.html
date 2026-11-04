@@ -1,0 +1,64 @@
+{{/*
+  Zhao Lab: journal logo strip (`journal-strip`).
+
+  Shows small cover/logo thumbnails of the journals the group has published in.
+  Images live in assets/media/journals/<file>.png (downloaded from the MISSION
+  Lab website; only journals with a Zhao-co-authored paper are included).
+
+  Content params:
+    title   Section heading (optional)
+    text    Lead paragraph, markdown (optional)
+*/}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ $text := "" }}
+{{ with index $content "text" }}{{ $text = $page.RenderString (printf "%v" .) }}{{ end }}
+
+{{ $journals := slice
+  (dict "file" "science-advances.jpg" "name" "Science Advances")
+  (dict "file" "afm.jpg" "name" "Advanced Functional Materials")
+  (dict "file" "npj-computational-materials.jpg" "name" "npj Computational Materials")
+  (dict "file" "jmps.jpg" "name" "Journal of the Mechanics and Physics of Solids")
+  (dict "file" "mechanics-of-materials.jpg" "name" "Mechanics of Materials")
+  (dict "file" "jom.jpg" "name" "JOM")
+  (dict "file" "additive-manufacturing.jpg" "name" "Additive Manufacturing")
+  (dict "file" "advanced-science.jpg" "name" "Advanced Science")
+  (dict "file" "cmame.jpg" "name" "Computer Methods in Applied Mechanics and Engineering")
+  (dict "file" "journal-of-applied-mechanics.jpg" "name" "Journal of Applied Mechanics")
+  (dict "file" "smo.jpg" "name" "Structural and Multidisciplinary Optimization")
+  (dict "file" "engineering-structures.jpg" "name" "Engineering Structures")
+}}
+
+<div class="py-10 sm:py-12">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+
+    {{ with $title }}
+    <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">{{ . }}</h2>
+    {{ end }}
+
+    {{ with $text }}
+    <div class="mt-3 prose max-w-none text-gray-600 dark:text-gray-300">{{ . | safeHTML }}</div>
+    {{ end }}
+
+    <div class="hb-journal-strip mt-8">
+      {{ range $journals }}
+        {{ $name := .name }}
+        {{ with (resources.Get (path.Join "media/journals" .file)) }}
+        <figure class="hb-journal-item" title="{{ $name }}">
+          <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $name }}" loading="lazy" decoding="async">
+        </figure>
+        {{ end }}
+      {{ end }}
+    </div>
+
+    {{/* Divider between the journal strip and the publication list below. */}}
+    <hr class="hb-journal-divider" aria-hidden="true">
+
+  </div>
+</div>
