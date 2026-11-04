@@ -1,6 +1,6 @@
 ---
 title: 'Openings'
-summary: 'Zhao Lab welcomes students and researchers in mechanics, mechanical engineering, civil engineering, robotics, applied physics, computer science, and aerospace engineering.'
+summary: 'Zhao Lab welcomes students and researchers in engineering mechanics, electronic information, mechanical engineering, civil engineering, robotics, applied physics, computer science, and aerospace engineering.'
 date: 2026-10-14
 type: landing
 
@@ -16,7 +16,8 @@ sections:
 
         We welcome students and researchers with backgrounds in:
 
-        - Mechanics
+        - Engineering Mechanics
+        - Electronic Information
         - Mechanical Engineering
         - Civil Engineering
         - Robotics
